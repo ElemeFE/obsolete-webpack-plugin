@@ -24,14 +24,15 @@ function normalizeTargetBrowsers(targetBrowsers) {
   },[])
 }
 
-export default (userAgent, targetBrowsers) => {
+ function detect(userAgent, targetBrowsers) {
   const { browser: currentBrowser } = uaParse(userAgent);
-  
-  targetBrowsers = normalizeTargetBrowsers(targetBrowsers);
-
-  return targetBrowsers.some(targetBrowser => 
+  const isSupported = normalizeTargetBrowsers(targetBrowsers).some(targetBrowser => 
     currentBrowser.name.toLowerCase() === targetBrowser.name && 
     currentBrowser.major >= targetBrowser.major
   )
+
+  return isSupported;
 }
+
+export default detect
 

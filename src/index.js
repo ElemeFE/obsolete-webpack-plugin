@@ -1,4 +1,9 @@
-class BrowserUpdateWebpackPlugin {
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
+const browserslist = require('browserslist');
+const template = require('lodash.template');
+
+class ObsoleteWebpackPlugin {
   apply(compiler) {
     if (compiler.hooks) {
       compiler.hooks.emit.tapPromise(
@@ -13,19 +18,28 @@ class BrowserUpdateWebpackPlugin {
     });
   }
   async handleEmit(compilation) {
-    let fileContent = 'In this build:\n\n';
-
-    fileContent = Object.keys(compilation.assets).join('\n');
+    const browsers = browserslist();
+    const fileContent = readFileSync(resolve(__dirname, 'browser/obsolete.js'), 'utf-8');
+    const concatedFileContent = this.concatFileContent(fileContent, browsers);
 
     compilation.assets['browser-update.js'] = {
       source() {
-        return fileContent;
+        return concatedFileContent;
       },
       size() {
-        return fileContent.length;
+        return concatedFileContent.length;
       },
     };
   }
+  concatFileContent(fileContent, browsers) {
+    return fileContent + `
+      (function () {
+        new Obsolete({
+          browsers: ${JSON.stringify(browsers)}
+        });
+      }());
+    `;
+  }
 }
 
-module.exports = BrowserUpdateWebpackPlugin;
+module.exports = ObsoleteWebpackPlugin;
