@@ -1,30 +1,33 @@
-const { readFile } = require('fs');
-const { promisify } = require('util');
 const { resolve } = require('path');
 const browserslist = require('browserslist');
-const readFileAsync = promisify(readFile);
+const {createHash} = require('./utils/hash');
+const {readFileAsync} = require('./utils/async-fs');
+
+const webAssetPath = resolve(__dirname, '../web-dist/obsolete.js');
 
 class ObsoleteWebpackPlugin {
+  constructor(options) {
+    this.options = options;
+  }
   apply(compiler) {
     compiler.hooks.compilation.tap(
       this.constructor.name,
       compilation => this.compilation(compilation)
     );
-    compiler.hooks.emit.tapPromise(
-      this.constructor.name,
-      compilation => this.emit(compilation)
-    );
+    // compiler.hooks.emit.tapPromise(
+    //   this.constructor.name,
+    //   compilation => this.alterChunks(compilation)
+    // );
   }
   compilation(compilation) {
-    // const newChunk = compilation.addChunk('newChunk');
-    // newChunk.preventIntegration = true;
-    // entrypoint.unshiftChunk(newChunk);
-    // newChunk.addGroup(entrypoint);
-    // entrypoint.setRuntimeChunk(newChunk);
+    // compilation.hooks.htmlWebpackPluginAlterChunks.tap(
+    //   this.constructor.name,
+    //   (chunks) => this.alterChunks(compilation, chunks)
+    // );
 
-    compilation.hooks.htmlWebpackPluginAlterChunks.tap(
+    compilation.hooks.additionalAssets.tapPromise(
       this.constructor.name,
-      (chunks) => this.alterChunks(compilation, chunks)
+      () => this.additionalAssets(compilation)
     );
 
     // compilation.hooks.htmlWebpackPluginAlterAssetTags.tap(
@@ -32,17 +35,39 @@ class ObsoleteWebpackPlugin {
     //   (htmlPluginData) => this.alterAssetTags(compilation, htmlPluginData)
     // );
   }
-  alterChunks(compilation, chunks) {
-    for (const entrypoint of compilation.entrypoints.values()) {
-      const newChunk = compilation.addChunk('newChunk');
+  async additionalAssets(compilation) {
+    const webAsset = await this.getWebAsset();
+    const obsoleteChunk = compilation.addChunk(this.options.name);
 
-      newChunk.addGroup(entrypoint);
-      entrypoint.unshiftChunk(newChunk);
-      newChunk.files.push(`${compilation.outputOptions.publicPath}browser-update.js`);
-      debugger;
-    }
+    // obsoleteChunk.hash = createHash(webAsset.content);
+    // obsoleteChunk.renderedHash = obsoleteChunk.hash.substr(0, 8);
+    obsoleteChunk.files.push(webAsset.filename);
+    obsoleteChunk.name = 'obsolete';
+    obsoleteChunk.id = 'obsolete';
+    obsoleteChunk.ids = ['obsolete'];
 
-    return chunks;
+    compilation.assets[webAsset.filename] = {
+      source() {
+        return webAsset.fileContent;
+      },
+      size() {
+        return webAsset.fileContent.length;
+      },
+      map() {
+
+      }
+    };
+
+    // for (const entrypoint of compilation.entrypoints.values()) {
+    //   entrypoint.pushChunk(obsoleteChunk);
+    //   obsoleteChunk.addGroup(entrypoint);
+    // }
+    debugger;
+    // const webAsset = await this.getWebAsset();
+
+    // webAsset.content += this.getAppendedCode();
+    // // webAsset.name = webAsset.name.replace('[contenthash:8]', createHash(webAsset.content));
+    // webAsset.name = this.options.name;
   }
   alterAssetTags(compilation, htmlPluginData) {
     // htmlPluginData.body = [
@@ -59,23 +84,35 @@ class ObsoleteWebpackPlugin {
     // ];
     return htmlPluginData;
   }
-  async emit(compilation) {
-    const libraryPath = resolve(__dirname, 'browser/obsolete.js');
-    const fileContent = await readFileAsync(libraryPath, 'utf-8');
-    const browsers = browserslist();
-    const concatedFileContent = this.concatFileContent(fileContent, browsers);
 
-    compilation.assets['browser-update.js'] = {
+  async emit(compilation) {
+    const webAsset = await this.getWebAsset();
+
+    webAsset.content += this.getAppendedCode();
+    webAsset.name = webAsset.name.replace('[contenthash:8]', createHash(webAsset.content));
+    compilation.assets[webAsset.name] = {
       source() {
-        return concatedFileContent;
+        return webAsset.content;
       },
       size() {
-        return concatedFileContent.length;
+        return webAsset.content.length;
       },
     };
   }
-  concatFileContent(fileContent, browsers) {
-    return fileContent + `
+  async getWebAsset() {
+    const fileContent = await readFileAsync(webAssetPath, 'utf-8');
+
+    return {
+      filename: this.options.filename
+        .replace('[name]', this.options.name)
+        .replace('[hash]', createHash(fileContent)),
+      fileContent
+    }
+  }
+  getAppendedCode() {
+    const browsers = browserslist();
+
+    return `
       (function () {
         new Obsolete({
           browsers: ${JSON.stringify(browsers)}

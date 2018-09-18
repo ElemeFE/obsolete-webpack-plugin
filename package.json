@@ -2,13 +2,14 @@
   "name": "obsolete-webpack-plugin",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "files": [
-    "lib"
+    "src",
+    "web-dist"
   ],
   "scripts": {
     "build": "npm run build:node & npm run build:browser",
-    "build:browser": "rollup -c",
+    "build:web": "rollup -c",
     "build:node": "babel src --out-dir lib --ignore src/browser"
   },
   "dependencies": {
