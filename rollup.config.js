@@ -2,9 +2,9 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {
-  input: './src/browser/obsolete.js',
+  input: './web/obsolete.js',
   output: {
-    file: './lib/browser/obsolete.js',
+    file: './web-dist/obsolete.js',
     format: 'iife',
     name: 'Obsolete'
   },
