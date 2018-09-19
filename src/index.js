@@ -14,86 +14,39 @@ class ObsoleteWebpackPlugin {
       this.constructor.name,
       compilation => this.compilation(compilation)
     );
-    // compiler.hooks.emit.tapPromise(
-    //   this.constructor.name,
-    //   compilation => this.alterChunks(compilation)
-    // );
   }
   compilation(compilation) {
-    // compilation.hooks.htmlWebpackPluginAlterChunks.tap(
-    //   this.constructor.name,
-    //   (chunks) => this.alterChunks(compilation, chunks)
-    // );
 
     compilation.hooks.additionalAssets.tapPromise(
       this.constructor.name,
       () => this.additionalAssets(compilation)
     );
-
-    // compilation.hooks.htmlWebpackPluginAlterAssetTags.tap(
-    //   this.constructor.name,
-    //   (htmlPluginData) => this.alterAssetTags(compilation, htmlPluginData)
-    // );
   }
   async additionalAssets(compilation) {
     const webAsset = await this.getWebAsset();
     const obsoleteChunk = compilation.addChunk(this.options.name);
 
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);
-    // obsoleteChunk.hash = createHash(webAsset.content);
-    // obsoleteChunk.renderedHash = obsoleteChunk.hash.substr(0, 8);
-    // obsoleteChunk.name = 'obsolete';
-    // obsoleteChunk.id = 'obsolete';
-    obsoleteChunk.ids = ['obsolete'];
+    obsoleteChunk.ids = [this.options.name];
     obsoleteChunk.files.push(webAsset.filename);
     compilation.assets[webAsset.filename] = {
       source() {
-        return webAsset.fileContent;
+        return webAsset.content;
       },
       size() {
         return this.source().length;
       },
-      map(options) {
+      map() {
         return null;
       }
     };
   }
-  connectEntrypointAndChunk(compilation, chunk) => {
+  connectEntrypointAndChunk(compilation, chunk) {
     for (const entrypoint of compilation.entrypoints.values()) {
       if (entrypoint.pushChunk(chunk)) {
         chunk.addGroup(entrypoint);
       }
     }
-  }
-  alterAssetTags(compilation, htmlPluginData) {
-    // htmlPluginData.body = [
-    //   ...htmlPluginData.body,
-    //   { 
-    //     tagName: 'script',
-    //     closeTag: true,
-    //     attributes: { 
-    //       type: 'text/javascript', 
-    //       src: `${compilation.outputOptions.publicPath}browser-update.js`,
-    //       async: true
-    //     } 
-    //   }
-    // ];
-    return htmlPluginData;
-  }
-
-  async emit(compilation) {
-    const webAsset = await this.getWebAsset();
-
-    webAsset.content += this.getAppendedCode();
-    webAsset.name = webAsset.name.replace('[contenthash:8]', createHash(webAsset.content));
-    compilation.assets[webAsset.name] = {
-      source() {
-        return webAsset.content;
-      },
-      size() {
-        return webAsset.content.length;
-      },
-    };
   }
   async getWebAsset() {
     const fileContent = await readFileAsync(webAssetPath, 'utf-8');
