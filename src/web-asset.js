@@ -20,7 +20,7 @@ class WebAsset {
    */
   async populate(locals = {}, uglify = false) {
     this.fileContent = await readFileAsync(this.sourcePath);
-    this.fileContent += this.getComposedCode(locals);
+    this.composeCode(locals);
     if (uglify) {
       this.compress();
     }
@@ -28,7 +28,9 @@ class WebAsset {
   /**
    * Compress source code.
    */
-  compress() {}
+  compress() {
+    // TODO
+  }
   /**
    * Format filename with placeholder of `[name]` and `[hash]`
    *
@@ -67,8 +69,8 @@ class WebAsset {
    * @param {Object} locals variables populated to template.
    * @returns {String}.
    */
-  getComposedCode(locals) {
-    return `
+  composeCode(locals) {
+    this.fileContent += `
       (function () {
         new Obsolete({
           browsers: ${JSON.stringify(locals.browsers)}
