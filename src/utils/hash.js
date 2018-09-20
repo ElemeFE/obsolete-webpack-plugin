@@ -4,9 +4,9 @@ function createHash(content, algorithm = 'md4') {
   return crypto
     .createHash(algorithm)
     .update(content)
-    .digest('base64');
-};
+    .digest('hex');
+}
 
 module.exports = {
-  createHash
+  createHash,
 };

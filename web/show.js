@@ -1,16 +1,16 @@
 function createElement(tag, className) {
-  const element = document.createElement(tag)
+  const element = document.createElement(tag);
 
   element.className = className || '';
-  return element
+  return element;
 }
 
 export default function() {
-  const styleElement = createElement('style')
-  document.head.appendChild(styleElement)
-  const divElement = createElement('div', 'bu')
-  document.body.appendChild(divElement)
-  
+  const styleElement = createElement('style');
+  document.head.appendChild(styleElement);
+  const divElement = createElement('div', 'bu');
+  document.body.appendChild(divElement);
+
   styleElement.textContent = `
     .bu {
       position: fixed;
@@ -21,8 +21,8 @@ export default function() {
       background-color: #fff;
       box-shadow: 0 0 5px rgba(0,0,0,0.2);
     }
-  `
+  `;
   divElement.innerHTML = `
     <span>请升级浏览器至 Chrome 最新版以获取最佳体验</span>
-  `
+  `;
 }

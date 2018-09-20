@@ -6,10 +6,7 @@ export default {
   output: {
     file: './web-dist/obsolete.js',
     format: 'iife',
-    name: 'Obsolete'
+    name: 'Obsolete',
   },
-  plugins: [
-    resolve(),
-    commonjs()
-  ]
+  plugins: [resolve(), commonjs()],
 };

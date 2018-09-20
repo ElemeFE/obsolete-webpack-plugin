@@ -10,7 +10,8 @@
   "scripts": {
     "build": "npm run build:node & npm run build:browser",
     "build:web": "rollup -c",
-    "build:node": "babel src --out-dir lib --ignore src/browser"
+    "build:node": "babel src --out-dir lib --ignore src/browser",
+    "lint": "eslint --fix ."
   },
   "dependencies": {
     "browserslist": "^4.1.1",
@@ -26,6 +27,11 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "prettier": "^1.14.3",
     "rollup-plugin-node-resolve": "^3.4.0",
     "webpack": "^4.19.0"
   },

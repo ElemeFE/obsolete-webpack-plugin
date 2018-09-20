@@ -12,7 +12,7 @@ class Obsolete {
     const isSupported = detect(navigator.userAgent, browsers);
 
     if (!isSupported) {
-      show()
+      show();
     }
   }
 }
