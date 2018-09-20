@@ -1,20 +1,28 @@
 const { resolve } = require('path');
 const browserslist = require('browserslist');
-const { createHash } = require('./utils/hash');
-const { readFileAsync } = require('./utils/async-fs');
+const WebAsset = require('./webAsset');
 
-const webAssetPath = resolve(__dirname, '../web-dist/obsolete.js');
-const defaultOptions = {
-  name: 'obsolete',
-};
+const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
 
 class ObsoleteWebpackPlugin {
+  /**
+   * @param {Object} options User configuration.
+   */
   constructor(options) {
+    const defaultOptions = {
+      name: 'obsolete'
+    };
+
     this.options = {
       ...defaultOptions,
       ...options,
     };
   }
+  /**
+   * Entrypoint of plugin.
+   * 
+   * @param {Compilation} compiler See also webpack/lib/Compilation.js.
+   */
   apply(compiler) {
     compiler.hooks.compilation.tap(this.constructor.name, compilation => {
       compilation.hooks.additionalAssets.tapPromise(this.constructor.name, () =>
@@ -22,66 +30,39 @@ class ObsoleteWebpackPlugin {
       );
     });
   }
+  /**
+   * Attach plugin chunk to webpack inside.
+   * Generate additional asset finally.
+   * 
+   * @param {Compilation} compilation See also webpack/lib/Compilation.js.
+   */
   async additionalAssets(compilation) {
     if (compilation.name) {
       return;
     }
 
-    const webAsset = await this.getWebAsset(compilation);
+    const webAsset = new WebAsset(libraryPath, compilation.outputOptions.filename);
     const obsoleteChunk = compilation.addChunk(this.options.name);
 
+    await webAsset.populate();
+    webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);
     obsoleteChunk.ids = [this.options.name];
     obsoleteChunk.files.push(webAsset.filename);
-    compilation.assets[webAsset.filename] = {
-      source() {
-        return webAsset.fileContent;
-      },
-      size() {
-        return this.source().length;
-      },
-      map() {
-        return null;
-      },
-    };
+    compilation.assets[webAsset.filename] = webAsset.getWebpackAsset();
   }
+  /**
+   * Connect entrypoint chunk group with plugin chunk each other
+   * 
+   * @param {Compilation} compilation See also webpack/lib/Compilation.js.
+   * @param {Chunk} chunk See also webpack/lib/Chunk.js.
+   */
   connectEntrypointAndChunk(compilation, chunk) {
     for (const entrypoint of compilation.entrypoints.values()) {
       if (entrypoint.pushChunk(chunk)) {
         chunk.addGroup(entrypoint);
       }
     }
-  }
-  async getWebAsset(compilation) {
-    const fileContent = await readFileAsync(webAssetPath, 'utf-8');
-
-    return {
-      filename: this.getPopulatedFilename(
-        fileContent,
-        compilation.outputOptions
-      ),
-      fileContent,
-    };
-  }
-  getPopulatedFilename(fileContent, outputOptions) {
-    return outputOptions.filename
-      .replace(/\[name\]/gi, this.options.name)
-      .replace(/\[(?:content|chunk|)hash(?::(\d+))?\]/gi, (...matches) => {
-        const hash = createHash(fileContent);
-
-        return matches[1] ? hash.substr(0, Number(matches[1])) : hash;
-      });
-  }
-  getAppendedCode() {
-    const browsers = browserslist();
-
-    return `
-      (function () {
-        new Obsolete({
-          browsers: ${JSON.stringify(browsers)}
-        });
-      }());
-    `;
   }
 }
 
