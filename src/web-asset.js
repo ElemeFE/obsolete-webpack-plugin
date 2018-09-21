@@ -18,7 +18,7 @@ class WebAsset {
    * @param {Object} locals Local variables populated to template.
    * @param {Boolean} uglify
    */
-  async populate(locals = {}, uglify = false) {
+  async populate(locals, uglify = false) {
     this.fileContent = await readFileAsync(this.sourcePath);
     this.composeCode(locals);
     if (uglify) {
@@ -72,9 +72,7 @@ class WebAsset {
   composeCode(locals) {
     this.fileContent += `
       (function () {
-        new Obsolete({
-          browsers: ${JSON.stringify(locals.browsers)}
-        });
+        new Obsolete().test(${JSON.stringify(locals.browsers)});
       }());
     `;
   }

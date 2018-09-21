@@ -1,1 +1,3 @@
-# WIP
+# obsolete-webpack-plugin
+
+WIP

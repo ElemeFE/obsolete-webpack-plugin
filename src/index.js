@@ -47,7 +47,9 @@ class ObsoleteWebpackPlugin {
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);
 
-    await webAsset.populate();
+    await webAsset.populate({
+      browsers: browserslist(),
+    });
     webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);
     obsoleteChunk.ids = [this.options.name];

@@ -1,18 +1,18 @@
-import detect from './detect';
-import show from './show';
+import Doctor from './doctor';
+import Alert from './alert';
 
 class Obsolete {
   constructor(opts) {
     this.opt = opts;
-    if (opts.browsers) {
-      this.detect(opts.browsers);
-    }
+    this.doctor = new Doctor();
+    this.alert = null;
   }
-  detect(browsers) {
-    const isSupported = detect(navigator.userAgent, browsers);
+  test(browsers) {
+    const passed = this.doctor.detect(navigator.userAgent, browsers);
 
-    if (!isSupported) {
-      show();
+    if (!passed) {
+      this.alert = new Alert();
+      this.alert.prompt();
     }
   }
 }
