@@ -13,7 +13,9 @@ class Obsolete {
     if (!passed) {
       this.alert = new Alert();
       this.alert.prompt();
+      return false;
     }
+    return true;
   }
 }
 

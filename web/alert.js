@@ -1,12 +1,12 @@
 class Alert {
   prompt() {
     const styleElement = this.createElement('style');
-    document.head.appendChild(styleElement);
-    const divElement = this.createElement('div', 'bu');
-    document.body.appendChild(divElement);
+    const divElement = this.createElement('div', {
+      class: 'obsolete',
+    });
 
     styleElement.textContent = `
-      .bu {
+      .obsolete {
         position: fixed;
         z-index: 1000;
         bottom: 0;
@@ -19,11 +19,15 @@ class Alert {
     divElement.innerHTML = `
       <span>请升级浏览器至 Chrome 最新版以获取最佳体验</span>
     `;
+    document.head.appendChild(styleElement);
+    document.body.appendChild(divElement);
   }
-  createElement(tag, className) {
+  createElement(tag, attributes) {
     const element = document.createElement(tag);
 
-    element.className = className || '';
+    Object.entries(attributes).forEach((key, value) => {
+      element.setAttribute(key, value);
+    });
     return element;
   }
 }
