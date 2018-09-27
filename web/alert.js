@@ -1,4 +1,7 @@
 class Alert {
+  /**
+   * Prompt message to user.
+   */
   prompt() {
     const styleElement = this.createElement('style');
     const divElement = this.createElement('div', {

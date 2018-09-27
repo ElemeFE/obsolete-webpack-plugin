@@ -1,42 +1,45 @@
-import uaParse from 'ua-parser-js';
+import UAParser from './ua-parser';
+import Browser from './browser';
+import compareVersion from './utils/compareVersion';
 
 class Doctor {
+  /**
+   * Detect if the userAgent satisfies requirement of target browsers.
+   *
+   * @param {String} userAgent
+   * @param {Array<String>} targetBrowsers The output of `browserslist`.
+   * @returns {Boolean}
+   */
   detect(userAgent, targetBrowsers) {
-    const { browser: currentBrowser } = uaParse(userAgent);
+    const currentBrowser = new UAParser().parse(userAgent);
     const normalizedTargetBrowsers = this.normalizeTargetBrowsers(
       targetBrowsers
     );
     const passed = normalizedTargetBrowsers.some(
       targetBrowser =>
-        currentBrowser.name.toLowerCase() === targetBrowser.name &&
-        currentBrowser.major >= targetBrowser.major
+        currentBrowser.name === targetBrowser.name &&
+        compareVersion(currentBrowser.major, targetBrowser.major) !==
+          compareVersion.LT
     );
 
     return passed;
   }
+  /**
+   * Normalize target browsers to the instance of `Browser`.
+   *
+   * @param {Array<String>} targetBrowsers
+   * @returns {Array<Browser>}
+   */
   normalizeTargetBrowsers(targetBrowsers) {
-    return targetBrowsers
-      .map(browser => {
-        const [name, version] = browser.split(' ');
+    const rBrowser = /(\w+) (([\d\.])+(?:-[\d\.]+)?|all)/;
+    const normalizedTargetBrowsers = targetBrowsers.map(browser => {
+      const matches = rBrowser.exec(browser);
 
-        return {
-          major: version === 'all' ? 'all' : /\d+/.exec(version)[0],
-          name,
-          version,
-        };
-      })
-      .reduce((ret, browser) => {
-        const found = ret.find(item => item.name === browser.name);
+      return new Browser(matches[1], matches[2], matches[3] || '0');
+    });
 
-        if (!found) {
-          ret.push(browser);
-          return ret;
-        }
-        if (browser.major < found.major) {
-          ret.splice(ret.indexOf(found), 1, browser);
-          return ret;
-        }
-        return ret;
-      }, []);
+    return normalizedTargetBrowsers;
   }
 }
+
+export default Doctor;
