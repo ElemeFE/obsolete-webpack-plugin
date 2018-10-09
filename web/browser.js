@@ -1,8 +1,8 @@
 class Browser {
   /**
-   * @param {String} name
-   * @param {String} version
-   * @param {String} primaryVersion
+   * @param {string} name
+   * @param {string} version
+   * @param {string} primaryVersion
    */
   constructor(name, version, primaryVersion) {
     this.name = name;

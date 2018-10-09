@@ -3,8 +3,8 @@ const crypto = require('crypto');
 /**
  * Convert content to hash string.
  *
- * @param {String} content
- * @param {String} algorithm
+ * @param {string} content
+ * @param {string} algorithm
  */
 function createHash(content, algorithm = 'md4') {
   return crypto

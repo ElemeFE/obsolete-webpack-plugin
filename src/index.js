@@ -6,11 +6,22 @@ const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
 
 class ObsoleteWebpackPlugin {
   /**
-   * @param {Object} options User configuration.
+   * @param {Object} [options] Configuration.
+   * @param {string} [options.name] The chunk name
+   * @param {boolean} [options.async] The script attribute.
+   * @param {string} [options.template] The prompt template. If not set, then templatePath will be read.
+   * @param {string} [options.templatePath] The prompt template path, shound be a Vue or React component.
+   * @param {string[]} [options.browsers] The browsers to support, overriding browserslist.
+   * @param {boolean} [options.promptOnUnknownBrowser] If userAgent is unknown, the prompt is shown.
    */
   constructor(options) {
     const defaultOptions = {
       name: 'obsolete',
+      async: true,
+      template: '',
+      templatePath: '',
+      browsers: [],
+      promptOnUnknownBrowser: false,
     };
 
     this.options = {
@@ -48,7 +59,9 @@ class ObsoleteWebpackPlugin {
     const obsoleteChunk = compilation.addChunk(this.options.name);
 
     await webAsset.populate({
-      browsers: browserslist(),
+      browsers: browserslist(this.options.browsers),
+      template: this.options.template,
+      promptOnUnknownBrowser: this.options.promptOnUnknownBrowser,
     });
     webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);

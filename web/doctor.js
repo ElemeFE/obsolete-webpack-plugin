@@ -6,9 +6,9 @@ class Doctor {
   /**
    * Detect if the userAgent satisfies requirement of target browsers.
    *
-   * @param {String} userAgent
-   * @param {Array<String>} targetBrowsers The output of `browserslist`.
-   * @returns {Boolean}
+   * @param {string} userAgent
+   * @param {string[]} targetBrowsers The output of `browserslist`.
+   * @returns {boolean}
    */
   detect(userAgent, targetBrowsers) {
     const currentBrowser = new UAParser().parse(userAgent);
@@ -27,8 +27,8 @@ class Doctor {
   /**
    * Normalize target browsers to the instance of `Browser`.
    *
-   * @param {Array<String>} targetBrowsers
-   * @returns {Array<Browser>}
+   * @param {string[]} targetBrowsers The output of `browserslist`.
+   * @returns {Browser[]}
    */
   normalizeTargetBrowsers(targetBrowsers) {
     const rBrowser = /(\w+) (([\d\.])+(?:-[\d\.]+)?|all)/;

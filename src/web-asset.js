@@ -4,8 +4,8 @@ const { createHash } = require('./utils/hash');
 
 class WebAsset {
   /**
-   * @param {String} sourcePath
-   * @param {String} filename
+   * @param {string} sourcePath
+   * @param {string} filename
    */
   constructor(sourcePath, filename) {
     this.sourcePath = sourcePath;
@@ -15,12 +15,12 @@ class WebAsset {
   /**
    * Generate client code with defined variables.
    *
-   * @param {Object} locals Local variables populated to template.
-   * @param {Boolean} uglify
+   * @param {Object} context Variables populated to template.
+   * @param {boolean} uglify
    */
-  async populate(locals, uglify = false) {
+  async populate(context, uglify = false) {
     this.fileContent = await readFileAsync(this.sourcePath);
-    this.composeCode(locals);
+    this.composeCode(context);
     if (uglify) {
       this.compress();
     }
@@ -34,7 +34,7 @@ class WebAsset {
   /**
    * Format filename with placeholder of `[name]` and `[hash]`
    *
-   * @param {String} name The webpack entry name to replace RegExp.
+   * @param {string} name The webpack entry name to replace RegExp.
    */
   hash(name) {
     this.filename = this.filename
@@ -48,7 +48,7 @@ class WebAsset {
   /**
    * Get asset of generated file, the format is compliant with `webpack-resources`.
    *
-   * @returns {RawSource}.See also https://github.com/webpack/webpack-sources.
+   * @returns {RawSource} See also https://github.com/webpack/webpack-sources.
    */
   getWebpackAsset() {
     return {
@@ -66,13 +66,18 @@ class WebAsset {
   /**
    * Get code which is supposed to being appended to the bottom of library.
    *
-   * @param {Object} locals variables populated to template.
+   * @param {Object} context Variables populated to template.
    * @returns {String}.
    */
-  composeCode(locals) {
+  composeCode(context) {
     this.fileContent += `
       (function () {
-        new Obsolete().test(${JSON.stringify(locals.browsers)});
+        new Obsolete({
+          template: ${JSON.stringify(context.template)},
+          promptOnUnknownBrowser: ${JSON.stringify(
+            context.promptOnUnknownBrowser
+          )},
+        }).test(${JSON.stringify(context.browsers)});
       }());
     `;
   }

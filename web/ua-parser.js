@@ -16,7 +16,7 @@ class UAParser {
   /**
    * Convert userAgent to the instance of `Browser`.
    *
-   * @param {String} userAgent
+   * @param {string} userAgent
    * @returns {Browser}
    */
   parse(userAgent) {

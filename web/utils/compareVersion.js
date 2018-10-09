@@ -1,7 +1,7 @@
 /**
  * Validate if a string is semantic version.
  *
- * @param {String} version
+ * @param {string} version
  */
 function validateSemantic(version) {
   const rValidator = /^(\d+)(\.\d+)*$/;
@@ -13,9 +13,9 @@ function validateSemantic(version) {
 /**
  * Compare two semantic versions.
  *
- * @param {String} version
- * @param {String} version2
- * @returns {Number} Return `compareVersion.GT` if greater than, return `compareVersion.EQ`
+ * @param {string} version
+ * @param {string} version2
+ * @returns {number} Return `compareVersion.GT` if greater than, return `compareVersion.EQ`
  * if equal to, return `compareVersion.LT` if less than.
  */
 function compareVersion(version, version2) {
