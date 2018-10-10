@@ -25,8 +25,10 @@ class Doctor {
     }
     return normalizedTargetBrowsersOfTheSameName.some(
       targetBrowser =>
-        compareVersion(currentBrowser.major, targetBrowser.major) !==
-        compareVersion.LT
+        compareVersion(
+          currentBrowser.primaryVersion,
+          targetBrowser.primaryVersion
+        ) !== compareVersion.LT
     );
   }
   /**
@@ -36,7 +38,7 @@ class Doctor {
    * @returns {Browser[]}
    */
   normalizeTargetBrowsers(targetBrowsers) {
-    const rBrowser = /(\w+) (([\d\.])+(?:-[\d\.]+)?|all)/;
+    const rBrowser = /(\w+) (([\d\.]+)(?:-[\d\.]+)?|all)/;
 
     return targetBrowsers.map(browser => {
       const matches = rBrowser.exec(browser);

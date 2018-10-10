@@ -20,6 +20,7 @@ function filterObject(object, callback, thisArg) {
  * Remove empty value ('', null, undefined) in object.
  *
  * @param {Object<string, any>} object
+ * @returns {Object<string, any>}
  */
 function removeEmptyValues(object) {
   return filterObject(object, value => !['', null, undefined].includes(value));

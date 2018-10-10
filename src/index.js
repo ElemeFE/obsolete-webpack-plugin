@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const browserslist = require('browserslist');
+const { readFileAsync } = require('./lib/async-fs');
 const WebAsset = require('./web-asset');
 
 const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
@@ -21,7 +22,6 @@ class ObsoleteWebpackPlugin {
       async: true,
       template: '',
       templatePath: '',
-      browsers: [],
       promptOnNonTargetBrowser: false,
     };
 
@@ -58,10 +58,11 @@ class ObsoleteWebpackPlugin {
       compilation.outputOptions.filename
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);
+    const template = await this.createTemplate();
 
     await webAsset.populate({
       browsers: browserslist(this.options.browsers),
-      template: this.options.template,
+      template,
       promptOnNonTargetBrowser: this.options.promptOnNonTargetBrowser,
     });
     webAsset.hash(this.options.name);
@@ -82,6 +83,17 @@ class ObsoleteWebpackPlugin {
         chunk.addGroup(entrypoint);
       }
     }
+  }
+  /**
+   * Create html template from options `template` or `templatePath`.
+   */
+  async createTemplate() {
+    if (!this.options.template && this.options.templatePath) {
+      const template = readFileAsync(this.options.templatePath, 'utf-8');
+
+      return template;
+    }
+    return this.options.template;
   }
 }
 

@@ -35,7 +35,7 @@ class WebAsset {
   /**
    * Format filename with placeholder of `[name]` and `[hash]`
    *
-   * @param {string} name The webpack entry name to replace RegExp.
+   * @param {string} name The webpack chunk name to replace RegExp.
    */
   hash(name) {
     this.filename = this.filename

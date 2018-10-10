@@ -10,7 +10,7 @@ import Browser from './browser';
 class UAParser {
   constructor() {
     this.rBrowsers = {
-      chrome: /Chrome\/((\d)+\.\d+.\d+.\d+)/,
+      chrome: /Chrome\/((\d+)\.\d+.\d+.\d+)/,
       safari: /Version\/((\d+\.\d+)) Safari/,
       firefox: /Firefox\/((\d+)\.\d+)/,
     };
