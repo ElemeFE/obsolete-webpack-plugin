@@ -9,10 +9,11 @@ class ObsoleteWebpackPlugin {
    * @param {Object} [options] Configuration.
    * @param {string} [options.name] The chunk name
    * @param {boolean} [options.async] The script attribute.
-   * @param {string} [options.template] The prompt template. If not set, then templatePath will be read.
+   * @param {string} [options.template] The prompt html template. If not set, then templatePath will be read.
    * @param {string} [options.templatePath] The prompt template path, shound be a Vue or React component.
    * @param {string[]} [options.browsers] The browsers to support, overriding browserslist.
-   * @param {boolean} [options.promptOnUnknownBrowser] If userAgent is unknown, the prompt is shown.
+   * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
+   * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
    */
   constructor(options) {
     const defaultOptions = {
@@ -21,7 +22,7 @@ class ObsoleteWebpackPlugin {
       template: '',
       templatePath: '',
       browsers: [],
-      promptOnUnknownBrowser: false,
+      promptOnNonTargetBrowser: false,
     };
 
     this.options = {
@@ -61,7 +62,7 @@ class ObsoleteWebpackPlugin {
     await webAsset.populate({
       browsers: browserslist(this.options.browsers),
       template: this.options.template,
-      promptOnUnknownBrowser: this.options.promptOnUnknownBrowser,
+      promptOnNonTargetBrowser: this.options.promptOnNonTargetBrowser,
     });
     webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);

@@ -4,14 +4,17 @@ import Alert from './alert';
 class Obsolete {
   /**
    * @param {Object} [options] Configuration.
-   * @param {string} [options.template] The prompt template. If not set, then templatePath will be read.
-   * @param {boolean} [options.promptOnUnknownBrowser] If userAgent is unknown, the prompt is shown.
+   * @param {string} [options.template] The prompt html template.
+   * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
+   * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
    */
   constructor(options) {
     const defaultOptions = {
       template:
-        'Your current browser is not supported, please upgrade it to the latest version.',
-      promptOnUnknownBrowser: false,
+        '<div style="position: fixed; left: 0; top: 0; background: #fff">' +
+        'Your current browser is not supported, please upgrade it to the latest version.' +
+        '</div>',
+      promptOnNonTargetBrowser: false,
     };
 
     this.options = {
@@ -28,7 +31,11 @@ class Obsolete {
    * @returns {boolean}
    */
   test(browsers) {
-    const passed = this.doctor.detect(navigator.userAgent, browsers);
+    const passed = this.doctor.detect(
+      navigator.userAgent,
+      browsers,
+      this.options.promptOnNonTargetBrowser
+    );
 
     if (!passed) {
       if (!this.alert) {

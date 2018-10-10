@@ -8,37 +8,41 @@ class Doctor {
    *
    * @param {string} userAgent
    * @param {string[]} targetBrowsers The output of `browserslist`.
+   * @param {boolean} promptOnNonTargetBrowser
    * @returns {boolean}
    */
-  detect(userAgent, targetBrowsers) {
+  detect(userAgent, targetBrowsers, promptOnNonTargetBrowser) {
     const currentBrowser = new UAParser().parse(userAgent);
     const normalizedTargetBrowsers = this.normalizeTargetBrowsers(
       targetBrowsers
     );
-    const passed = normalizedTargetBrowsers.some(
-      targetBrowser =>
-        currentBrowser.name === targetBrowser.name &&
-        compareVersion(currentBrowser.major, targetBrowser.major) !==
-          compareVersion.LT
+    const normalizedTargetBrowsersOfTheSameName = normalizedTargetBrowsers.filter(
+      targetBrowser => currentBrowser.name === targetBrowser.name
     );
 
-    return passed;
+    if (!normalizedTargetBrowsersOfTheSameName.length) {
+      return !promptOnNonTargetBrowser;
+    }
+    return normalizedTargetBrowsersOfTheSameName.some(
+      targetBrowser =>
+        compareVersion(currentBrowser.major, targetBrowser.major) !==
+        compareVersion.LT
+    );
   }
   /**
    * Normalize target browsers to the instance of `Browser`.
    *
-   * @param {string[]} targetBrowsers The output of `browserslist`.
+   * @param {string[]} targetBrowsers
    * @returns {Browser[]}
    */
   normalizeTargetBrowsers(targetBrowsers) {
     const rBrowser = /(\w+) (([\d\.])+(?:-[\d\.]+)?|all)/;
-    const normalizedTargetBrowsers = targetBrowsers.map(browser => {
+
+    return targetBrowsers.map(browser => {
       const matches = rBrowser.exec(browser);
 
       return new Browser(matches[1], matches[2], matches[3] || '0');
     });
-
-    return normalizedTargetBrowsers;
   }
 }
 

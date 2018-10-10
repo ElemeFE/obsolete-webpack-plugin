@@ -8,9 +8,7 @@
     "web-dist"
   ],
   "scripts": {
-    "build": "npm run build:node & npm run build:browser",
-    "build:web": "rollup -c",
-    "build:node": "babel src --out-dir lib --ignore src/browser",
+    "build": "rollup -c",
     "lint": "eslint --fix ."
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 const { resolve } = require('path');
-const { readFileAsync } = require('./utils/async-fs');
-const { createHash } = require('./utils/hash');
+const { readFileAsync } = require('./lib/async-fs');
+const { createHash } = require('./lib/hash');
+const { removeEmptyValues } = require('./lib/helper');
 
 class WebAsset {
   /**
@@ -19,7 +20,7 @@ class WebAsset {
    * @param {boolean} uglify
    */
   async populate(context, uglify = false) {
-    this.fileContent = await readFileAsync(this.sourcePath);
+    this.fileContent = await readFileAsync(this.sourcePath, 'utf-8');
     this.composeCode(context);
     if (uglify) {
       this.compress();
@@ -52,7 +53,7 @@ class WebAsset {
    */
   getWebpackAsset() {
     return {
-      source() {
+      source: () => {
         return this.fileContent;
       },
       size() {
@@ -67,17 +68,23 @@ class WebAsset {
    * Get code which is supposed to being appended to the bottom of library.
    *
    * @param {Object} context Variables populated to template.
-   * @returns {String}.
+   * @param {string[]} context.browsers Must be the output of `browserslist`.
+   * @param {string} [context.template]
+   * @param {boolean} [context.promptOnNonTargetBrowser]
+   * @returns {string}.
    */
   composeCode(context) {
+    const options = {
+      template: context.template,
+      promptOnNonTargetBrowser: context.promptOnNonTargetBrowser,
+    };
+    const slimOptions = removeEmptyValues(options);
+
     this.fileContent += `
       (function () {
-        new Obsolete({
-          template: ${JSON.stringify(context.template)},
-          promptOnUnknownBrowser: ${JSON.stringify(
-            context.promptOnUnknownBrowser
-          )},
-        }).test(${JSON.stringify(context.browsers)});
+        new Obsolete(${JSON.stringify(slimOptions)}).test(
+          ${JSON.stringify(context.browsers)}
+        );
       }());
     `;
   }

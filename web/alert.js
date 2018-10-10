@@ -2,26 +2,23 @@ class Alert {
   /**
    * Prompt message to user.
    *
-   * @param {string}
+   * @param {string} template The prompt html template.
    */
   prompt(template) {
-    const divElement = this.createElement('div', {
-      style: `
-        position: fixed;
-        left: 0;
-        top: 0;
-        background: #fff;
-      `,
-    });
+    const documentFragment = document.createDocumentFragment();
+    const placeholderElement = this.createElement('div');
 
-    divElement.innerHTML = template;
-    document.body.appendChild(divElement);
+    placeholderElement.innerHTML = template;
+    while (placeholderElement.firstChild) {
+      documentFragment.appendChild(placeholderElement.firstChild);
+    }
+    document.body.appendChild(documentFragment);
   }
   /**
    * Create DOM element.
    *
    * @param {string} tag
-   * @param {Object} attributes
+   * @param {Object<string, string>} attributes
    * @returns {HTMLElement}
    */
   createElement(tag, attributes) {
