@@ -14,20 +14,20 @@ function validateSemantic(version) {
  * Compare two semantic versions.
  *
  * @param {string} version
- * @param {string} version2
+ * @param {string} comparedVersion
  * @returns {number} Return `compareVersion.GT` if greater than, return `compareVersion.EQ`
  * if equal to, return `compareVersion.LT` if less than.
  */
-function compareVersion(version, version2) {
+function compareVersion(version, comparedVersion) {
   const rVersion = /\d+/g;
-  const rVersion2 = /\d+/g;
+  const rComparedVersion = /\d+/g;
 
-  [version, version2].forEach(version => {
+  [version, comparedVersion].forEach(version => {
     validateSemantic(version);
   });
   while (true) {
     const matches = rVersion.exec(version);
-    const matches2 = rVersion2.exec(version2);
+    const matches2 = rComparedVersion.exec(comparedVersion);
 
     if (matches && !matches2) {
       return Number(matches[0]) === 0 ? compareVersion.EQ : compareVersion.GT;
