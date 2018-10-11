@@ -16,7 +16,9 @@
     "browserslist-useragent": "^2.0.1",
     "lodash.template": "^4.4.0",
     "rollup": "^0.65.2",
-    "rollup-plugin-commonjs": "^9.1.6"
+    "rollup-plugin-commonjs": "^9.1.6",
+    "terser": "^3.10.0",
+    "webpack-sources": "^1.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -35,5 +37,8 @@
   "peerDependencies": {
     "html-webpack-plugin": ">=2.0.0",
     "webpack": ">=4.0.0"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
   }
 }

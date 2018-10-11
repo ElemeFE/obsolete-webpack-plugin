@@ -1,4 +1,6 @@
 const { resolve } = require('path');
+const terser = require('terser');
+const { CachedSource, OriginalSource } = require('webpack-sources');
 const { readFileAsync } = require('./lib/async-fs');
 const { createHash } = require('./lib/hash');
 const { removeEmptyValues } = require('./lib/helper');
@@ -17,20 +19,10 @@ class WebAsset {
    * Generate client code with defined variables.
    *
    * @param {Object} context Variables populated to template.
-   * @param {boolean} uglify
    */
-  async populate(context, uglify = false) {
+  async populate(context) {
     this.fileContent = await readFileAsync(this.sourcePath, 'utf-8');
-    this.composeCode(context);
-    if (uglify) {
-      this.compress();
-    }
-  }
-  /**
-   * Compress source code.
-   */
-  compress() {
-    // TODO
+    this.fileContent = this.composeCode(context);
   }
   /**
    * Format filename with placeholder of `[name]` and `[hash]`
@@ -49,20 +41,13 @@ class WebAsset {
   /**
    * Get asset of generated file, the format is compliant with `webpack-resources`.
    *
-   * @returns {RawSource} See also https://github.com/webpack/webpack-sources.
+   * @param {string} path Webpack output path
+   * @returns {CachedSource} See also https://github.com/webpack/webpack-sources.
    */
-  getWebpackAsset() {
-    return {
-      source: () => {
-        return this.fileContent;
-      },
-      size() {
-        return this.source().length;
-      },
-      map() {
-        return null;
-      },
-    };
+  createWebpackAsset(path) {
+    return new CachedSource(
+      new OriginalSource(this.fileContent, resolve(path, this.filename))
+    );
   }
   /**
    * Get code which is supposed to being appended to the bottom of library.
@@ -80,13 +65,16 @@ class WebAsset {
     };
     const slimOptions = removeEmptyValues(options);
 
-    this.fileContent += `
+    return (
+      this.fileContent +
+      `
       (function () {
         new Obsolete(${JSON.stringify(slimOptions)}).test(
           ${JSON.stringify(context.browsers)}
         );
       }());
-    `;
+    `
+    );
   }
 }
 

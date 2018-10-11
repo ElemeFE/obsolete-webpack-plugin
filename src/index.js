@@ -23,6 +23,8 @@ class ObsoleteWebpackPlugin {
       template: '',
       templatePath: '',
       promptOnNonTargetBrowser: false,
+      minify: true,
+      sourceMap: true,
     };
 
     this.options = {
@@ -67,9 +69,12 @@ class ObsoleteWebpackPlugin {
     });
     webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);
-    obsoleteChunk.ids = [this.options.name];
+    obsoleteChunk.id = this.options.name;
+    obsoleteChunk.ids = [obsoleteChunk.id];
     obsoleteChunk.files.push(webAsset.filename);
-    compilation.assets[webAsset.filename] = webAsset.getWebpackAsset();
+    compilation.assets[webAsset.filename] = webAsset.createWebpackAsset(
+      compilation.outputOptions.path
+    );
   }
   /**
    * Connect entrypoint chunk group with plugin chunk each other
