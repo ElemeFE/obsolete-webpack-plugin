@@ -1,4 +1,4 @@
-import Doctor from './doctor';
+import Detective from './detective';
 import Alert from './alert';
 
 class Obsolete {
@@ -21,7 +21,7 @@ class Obsolete {
       ...defaultOptions,
       ...options,
     };
-    this.doctor = new Doctor();
+    this.doctor = new Detective();
     this.alert = null;
   }
   /**
