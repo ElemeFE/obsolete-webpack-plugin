@@ -14,7 +14,6 @@
   "dependencies": {
     "browserslist": "^4.1.1",
     "browserslist-useragent": "^2.0.1",
-    "lodash.template": "^4.4.0",
     "rollup": "^0.65.2",
     "rollup-plugin-commonjs": "^9.1.6",
     "terser": "^3.10.0",
