@@ -2,17 +2,54 @@ class Alert {
   /**
    * Prompt message to user.
    *
-   * @param {string} template The prompt html template.
+   * @param {string} template
    */
   prompt(template) {
-    const documentFragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
     const placeholderElement = this.createElement('div');
+    const refs = [];
 
     placeholderElement.innerHTML = template;
     while (placeholderElement.firstChild) {
-      documentFragment.appendChild(placeholderElement.firstChild);
+      refs.push(placeholderElement.firstChild);
+      fragment.appendChild(placeholderElement.firstChild);
     }
-    document.body.appendChild(documentFragment);
+    this.bindEvents(fragment, refs);
+    document.body.appendChild(fragment);
+  }
+  /**
+   * Bind events for close button.
+   *
+   * @param {DocumentFragment} fragment
+   * @param {Node[]} fragmentChildNodes
+   */
+  bindEvents(fragment, fragmentChildNodes) {
+    const close = fragment.getElementById('obsoleteClose');
+
+    if (!close) {
+      return;
+    }
+    if (close.addEventListener) {
+      close.addEventListener(
+        'click',
+        this.handleClose.bind(this, fragmentChildNodes)
+      );
+    } else if (close.attachEvent) {
+      close.attachEvent(
+        'onclick',
+        this.handleClose.bind(this, fragmentChildNodes)
+      );
+    }
+  }
+  /**
+   * Close event handler.
+   *
+   * @param {Node[]} nodes
+   */
+  handleClose(nodes) {
+    nodes.forEach(node => {
+      node.parentNode.removeChild(node);
+    });
   }
   /**
    * Create DOM element.

@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 const browserslist = require('browserslist');
 const WebAsset = require('./web-asset');
-const Rendered = require('./ssr/renderer');
 
 const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
 
@@ -11,7 +10,6 @@ class ObsoleteWebpackPlugin {
    * @param {string} [options.name] The chunk name
    * @param {boolean} [options.async] The script attribute.
    * @param {string} [options.template] The prompt html template. If not set, then templatePath will be read.
-   * @param {string} [options.templatePath] The prompt template path, shound be a Vue or React component.
    * @param {string[]} [options.browsers] The browsers to support, overriding browserslist.
    * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
    * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
@@ -60,7 +58,7 @@ class ObsoleteWebpackPlugin {
       compilation.outputOptions.filename
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);
-    const template = await this.createTemplate();
+    const template = this.options.template;
 
     await webAsset.populate({
       browsers: browserslist(this.options.browsers),
@@ -88,20 +86,6 @@ class ObsoleteWebpackPlugin {
         chunk.addGroup(entrypoint);
       }
     }
-  }
-  /**
-   * Create html template from options `template` or `templatePath`.
-   *
-   * @returns {string}
-   */
-  async createTemplate() {
-    if (!this.options.template && this.options.templatePath) {
-      const rendered = new Rendered(this.options.templatePath);
-      const template = await rendered.render();
-
-      return template;
-    }
-    return this.options.template;
   }
 }
 

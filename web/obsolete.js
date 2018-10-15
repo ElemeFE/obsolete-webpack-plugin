@@ -13,6 +13,7 @@ class Obsolete {
       template:
         '<div style="position: fixed; left: 0; top: 0; background: #fff">' +
         'Your current browser is not supported, please upgrade it to the latest version.' +
+        '<button id="obsoleteClose">&times;</button>' +
         '</div>',
       promptOnNonTargetBrowser: false,
     };
