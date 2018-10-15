@@ -18,7 +18,7 @@ class Alert {
    * Create DOM element.
    *
    * @param {string} tag
-   * @param {Object<string, string>} attributes
+   * @param {Object<string, string>} [attributes]
    * @returns {HTMLElement}
    */
   createElement(tag, attributes) {

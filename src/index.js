@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 const browserslist = require('browserslist');
-const { readFileAsync } = require('./lib/async-fs');
 const WebAsset = require('./web-asset');
+const Rendered = require('./ssr/renderer');
 
 const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
 
@@ -91,10 +91,13 @@ class ObsoleteWebpackPlugin {
   }
   /**
    * Create html template from options `template` or `templatePath`.
+   *
+   * @returns {string}
    */
   async createTemplate() {
     if (!this.options.template && this.options.templatePath) {
-      const template = readFileAsync(this.options.templatePath, 'utf-8');
+      const rendered = new Rendered(this.options.templatePath);
+      const template = await rendered.render();
 
       return template;
     }
