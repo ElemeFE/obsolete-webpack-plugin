@@ -3,8 +3,10 @@ module.exports = {
     [
       '@babel/env',
       {
+        modules: false,
+        useBuiltIns: 'usage',
         targets: {
-          node: '8',
+          browsers: 'ie 6',
         },
       },
     ],

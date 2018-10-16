@@ -1,5 +1,4 @@
 const { resolve } = require('path');
-const terser = require('terser');
 const { CachedSource, OriginalSource } = require('webpack-sources');
 const { readFileAsync } = require('./lib/async-fs');
 const { createHash } = require('./lib/hash');
