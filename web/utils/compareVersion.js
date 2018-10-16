@@ -27,23 +27,25 @@ function compareVersion(version, comparedVersion) {
   });
   while (true) {
     const matches = rVersion.exec(version);
-    const matches2 = rComparedVersion.exec(comparedVersion);
+    const comparedMatches = rComparedVersion.exec(comparedVersion);
 
-    if (matches && !matches2) {
+    if (matches && !comparedMatches) {
       return Number(matches[0]) === 0 ? compareVersion.EQ : compareVersion.GT;
     }
-    if (!matches && matches2) {
-      return Number(matches2[0]) === 0 ? compareVersion.EQ : compareVersion.LT;
+    if (!matches && comparedMatches) {
+      return Number(comparedMatches[0]) === 0
+        ? compareVersion.EQ
+        : compareVersion.LT;
     }
-    if (matches && matches2) {
-      if (Number(matches[0]) > Number(matches2[0])) {
+    if (matches && comparedMatches) {
+      if (Number(matches[0]) > Number(comparedMatches[0])) {
         return compareVersion.GT;
       }
-      if (Number(matches[0]) < Number(matches2[0])) {
+      if (Number(matches[0]) < Number(comparedMatches[0])) {
         return compareVersion.LT;
       }
     }
-    if (!matches && !matches2) {
+    if (!matches && !comparedMatches) {
       return compareVersion.EQ;
     }
   }
