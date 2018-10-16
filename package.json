@@ -2,6 +2,13 @@
   "name": "obsolete-webpack-plugin",
   "version": "0.2.0",
   "license": "MIT",
+  "description": "A webpack plugin generates a browser-side separate file that detects browser compatibility based on `Browserslist` and prompts website users to upgrade it, including IE 6.",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "obsolete",
+    "obsolete-webpack-plugin"
+  ],
   "main": "src/index.js",
   "files": [
     "src",
@@ -9,7 +16,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint --fix ."
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "browserslist": "^4.1.1",
@@ -27,17 +35,31 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.6.2",
+    "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
     "rollup-plugin-node-resolve": "^3.4.0",
     "vue": "^2.5.17",
     "vue-server-renderer": "^2.5.17",
-    "webpack": "^4.19.0"
+    "webpack": "^4.19.0",
+    "yorkie": "^2.0.0"
   },
   "peerDependencies": {
     "html-webpack-plugin": ">=2.0.0",
     "webpack": ">=4.0.0"
   },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "bugs": "https://github.elenet.me/fe/obsolete-webpack-plugin/issues",
+  "homepage": "https://github.elenet.me/fe/obsolete-webpack-plugin",
+  "repository": "https://github.elenet.me/fe/obsolete-webpack-plugin.git",
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 8.0.0"
   }
 }
