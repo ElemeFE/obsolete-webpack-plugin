@@ -51,7 +51,29 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 ## Configuration
 
-TODO
+**name**
+
+type: `{string}` default: `'obsolete'`
+
+The chunk name.
+
+**template**
+
+type: `{string}`
+
+The prompt html template.
+
+**browsers**
+
+type: `{string[]}`
+
+The browsers to support, overriding browserslist.
+
+**promptOnNonTargetBrowser**
+
+type: `{boolean}` default: `false`
+
+If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
 
 ## Browser Support
 
@@ -59,4 +81,4 @@ TODO
 
 ## License
 
-TODO
+[MIT](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
