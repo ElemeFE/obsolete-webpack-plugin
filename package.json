@@ -15,7 +15,7 @@
     "web-dist"
   ],
   "scripts": {
-    "build": "rollup --config ./rollup.config.js",
+    "build": "rollup --config ./build/rollup.config.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "clean": "rimraf ./web-dist",

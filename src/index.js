@@ -8,8 +8,7 @@ class ObsoleteWebpackPlugin {
   /**
    * @param {Object} [options] Configuration.
    * @param {string} [options.name] The chunk name
-   * @param {boolean} [options.async] The script attribute.
-   * @param {string} [options.template] The prompt html template. If not set, then templatePath will be read.
+   * @param {string} [options.template] The prompt html template.
    * @param {string[]} [options.browsers] The browsers to support, overriding browserslist.
    * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
    * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
@@ -17,12 +16,7 @@ class ObsoleteWebpackPlugin {
   constructor(options) {
     const defaultOptions = {
       name: 'obsolete',
-      async: true,
-      template: '',
-      templatePath: '',
       promptOnNonTargetBrowser: false,
-      minify: true,
-      sourceMap: true,
     };
 
     this.options = {

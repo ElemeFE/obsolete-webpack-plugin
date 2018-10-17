@@ -13,6 +13,18 @@ export default {
     resolve(),
     commonjs(),
     babel({
+      presets: [
+        [
+          '@babel/env',
+          {
+            modules: false,
+            useBuiltIns: 'usage',
+            targets: {
+              browsers: '> 0%',
+            },
+          },
+        ],
+      ],
       exclude: 'node_modules/**',
     }),
   ],
