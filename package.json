@@ -1,6 +1,6 @@
 {
   "name": "obsolete-webpack-plugin",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "description": "A webpack plugin generates a browser-side separate file that detects browser compatibility based on `Browserslist` and prompts website users to upgrade it.",
   "keywords": [
