@@ -1,9 +1,8 @@
 # Obsolete Webpack Plugin
 
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![deps][deps]][deps-url]
-[![licenses][licenses]][licenses-url]
+[![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin)
+[![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org)
+[![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
 
 A webpack plugin generates a browser-side separate file that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
@@ -56,6 +55,12 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 ### Configuration
 
+TODO
+
 ### Browser Support
 
+TODO
+
 ### License
+
+TODO

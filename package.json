@@ -18,7 +18,8 @@
     "build": "rollup --config ./rollup.config.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "clean": "rimraf ./web-dist"
+    "clean": "rimraf ./web-dist",
+    "prepublishOnly": "npm run clean && npm run lint && npm run build"
   },
   "dependencies": {
     "browserslist": "^4.1.1",
