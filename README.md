@@ -11,17 +11,17 @@ A webpack plugin generates a browser-side separate file that detects browser com
 
 ### Installation
 
-``` sh
+```sh
 $ npm i -D obsolete-webpack-plugin
 ```
 
 ### Basic Usage
 
-``` js
+```js
 const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
 ```
 
-``` js
+```js
 {
   plugins: [
     new ObsoleteWebpackPlugin()
@@ -31,13 +31,13 @@ const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
 
 ### Best Practice
 
-``` js
+```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 ```
 
-``` js
+```js
 {
   plugins: [
     new HtmlWebpackPlugin(),
@@ -61,9 +61,16 @@ The chunk name.
 
 **template**
 
-type: `{string}`
+type: `{string}` default:
 
-The prompt html template.
+```js
+`<div style="position: fixed; left: 0; top: 0; background: #fff">
+  Your current browser is not supported, please upgrade it to the latest version.
+  <button id="obsoleteClose">&times;</button>
+</div>`
+```
+
+The prompt html template injected to the bottom of body.
 
 **browsers**
 
