@@ -51,6 +51,8 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 ## Configuration
 
+### Options
+
 **name**
 
 type: `{string}` default: `'obsolete'`
@@ -78,7 +80,3 @@ If the current browser name doesn't match one of the target browsers, it's consi
 ## Browser Support
 
 TODO
-
-## License
-
-[MIT](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
