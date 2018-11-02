@@ -28,7 +28,7 @@ class Obsolete {
   /**
    * Test browser compatibility.
    *
-   * @param {string[]} browsers Must be the output of `browserslist`.
+   * @param {string[]} browsers Browser names in Can I Use.
    * @returns {boolean}
    */
   test(browsers) {

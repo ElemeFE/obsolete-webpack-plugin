@@ -76,7 +76,7 @@ The prompt html template injected to the bottom of body.
 
 type: `{string[]}`
 
-The browsers to support, overriding browserslist.
+Browsers to support, overriding browserslist.
 
 **promptOnNonTargetBrowser**
 
