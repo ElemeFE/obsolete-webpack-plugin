@@ -17,6 +17,15 @@ class UAParser {
         excludes: [/Mobile/i],
       },
       /**
+       * Edge for desktop.
+       *
+       * @example Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.9200
+       */
+      edge: {
+        includes: [/Edge\/((\d+)[.\w]*)/i],
+        excludes: [/Mobile/i],
+      },
+      /**
        * Opera for desktop.
        *
        * @example Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 OPR/56.0.3051.52
@@ -59,7 +68,7 @@ class UAParser {
        * @example Mozilla/5.0 (iPad; CPU OS 9_3_5 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13G36 Safari/601.1
        *          Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1
        */
-      ios: [/(iPad|iPhone).+OS ((\d+_\d+)\w*)/i],
+      ios_saf: [/(iPad|iPhone).+OS ((\d+_\d+)\w*)/i],
       /**
        * Android webview.
        *
