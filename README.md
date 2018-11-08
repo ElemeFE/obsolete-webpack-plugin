@@ -86,6 +86,8 @@ If the current browser name doesn't match one of the target browsers, it's consi
 
 ## Browser Support
 
+The name matches [Browserslist](https://github.com/browserslist/browserslist) queries.
+
 ### Desktop
 
 IE | Edge | Chrome | Safari | Firefox | Opera
@@ -94,9 +96,7 @@ IE | Edge | Chrome | Safari | Firefox | Opera
 
 ### Mobile
 
-ChromeAndroid | FirefoxAndroid | Android WebView | iOS
+ChromeAndroid | FirefoxAndroid | Android<br>(WebView) | iOS
 :-: | :-: | :-: | :-:
 ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
-
-
 
