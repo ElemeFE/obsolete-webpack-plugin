@@ -53,13 +53,13 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 ### Options
 
-**name**
+`name`
 
 type: `{string}` default: `'obsolete'`
 
 The chunk name.
 
-**template**
+`template`
 
 type: `{string}` default:
 
@@ -72,13 +72,13 @@ type: `{string}` default:
 
 The prompt html template injected to the bottom of body.
 
-**browsers**
+`browsers`
 
 type: `{string[]}`
 
 Browsers to support, overriding browserslist.
 
-**promptOnNonTargetBrowser**
+`promptOnNonTargetBrowser`
 
 type: `{boolean}` default: `false`
 
