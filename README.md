@@ -2,7 +2,7 @@
 
 A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
-## Getting Started
+## Getting Started :rocket:
 
 ### Prerequisite
 
@@ -41,7 +41,9 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 {
   plugins: [
     new HtmlWebpackPlugin(),
-    new ObsoleteWebpackPlugin(),
+    new ObsoleteWebpackPlugin({
+      name: 'obsolete'
+    }),
     new ScriptExtHtmlWebpackPlugin({
       async: 'obsolete'
     })
@@ -49,7 +51,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 }
 ```
 
-## Configuration
+## Configuration :art:
 
 ### Options
 
@@ -84,7 +86,7 @@ type: `{boolean}` default: `false`
 
 If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
 
-## Browser Support
+## Browser Support :eyeglasses:
 
 The name matches Browserslist queries.
 
