@@ -3,10 +3,7 @@ module.exports = {
   extends: ['plugin:prettier/recommended'],
   parserOptions: {
     parser: 'babel-eslint',
-    ecmaVersion: 8,
-    sourceType: 'module',
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true
-    },
+    ecmaVersion: 9,
+    sourceType: 'module'
   },
 }

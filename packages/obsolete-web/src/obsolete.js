@@ -5,7 +5,7 @@ class Obsolete {
   /**
    * @param {Object} [options] Configuration.
    * @param {string} [options.template] The prompt html template injected to the bottom of body.
-   * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
+   * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser name doesn't match one of the
    * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
    */
   constructor(options) {

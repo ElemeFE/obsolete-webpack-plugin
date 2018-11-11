@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "target": "esnext"
   },
-  "exclude": ["web-dist"]
+  "exclude": ["packages/obsolete-web/dist"]
 }

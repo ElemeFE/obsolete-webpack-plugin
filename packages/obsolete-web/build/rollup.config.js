@@ -3,9 +3,9 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 
 export default {
-  input: './web/obsolete.js',
+  input: 'src/obsolete.js',
   output: {
-    file: './web-dist/obsolete.js',
+    file: 'dist/obsolete.js',
     format: 'umd',
     name: 'Obsolete',
   },
@@ -25,7 +25,8 @@ export default {
           },
         ],
       ],
-      exclude: 'node_modules/**',
+      plugins: ['@babel/plugin-transform-property-mutators'],
+      exclude: '../../node_modules/**',
     }),
   ],
 };

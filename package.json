@@ -1,38 +1,23 @@
 {
-  "name": "obsolete-webpack-plugin",
-  "version": "0.2.6",
-  "license": "MIT",
-  "description": "A webpack plugin generates a browser-side separate file that detects browser compatibility based on `Browserslist` and prompts website users to upgrade it.",
-  "keywords": [
-    "webpack",
-    "plugin",
-    "obsolete",
-    "obsolete-webpack-plugin"
-  ],
-  "main": "src/index.js",
-  "files": [
-    "src",
-    "web-dist"
-  ],
+  "private": true,
   "scripts": {
-    "build": "rollup --config ./build/rollup.config.js",
+    "bootstrap": "npm install && lerna bootstrap",
+    "build": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "clean": "rimraf ./web-dist",
+    "clean": "rimraf packages/obsolete-web/dist",
     "prepublishOnly": "npm run clean && npm run lint && npm run build"
-  },
-  "dependencies": {
-    "browserslist": "^4.1.1",
-    "webpack-sources": "^1.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-property-mutators": "^7.1.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^4.19.1",
+    "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.6.2",
+    "lerna": "^3.4.3",
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2",
@@ -41,9 +26,6 @@
     "rollup-plugin-commonjs": "^9.1.6",
     "rollup-plugin-node-resolve": "^3.4.0",
     "yorkie": "^2.0.0"
-  },
-  "peerDependencies": {
-    "webpack": ">=4.0.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -54,10 +36,5 @@
       "git add"
     ]
   },
-  "bugs": "https://github.elenet.me/fe/obsolete-webpack-plugin/issues",
-  "homepage": "https://github.elenet.me/fe/obsolete-webpack-plugin",
-  "repository": "https://github.elenet.me/fe/obsolete-webpack-plugin.git",
-  "engines": {
-    "node": ">=7.6.0"
-  }
+  "name": "obsolete-webpack-plugin"
 }

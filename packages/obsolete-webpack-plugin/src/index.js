@@ -2,15 +2,13 @@ const { resolve } = require('path');
 const browserslist = require('browserslist');
 const WebAsset = require('./web-asset');
 
-const libraryPath = resolve(__dirname, '../web-dist/obsolete.js');
-
 class ObsoleteWebpackPlugin {
   /**
    * @param {Object} [options] Configuration.
-   * @param {string} [options.name] The chunk name
+   * @param {string} [options.name='obsolete'] The chunk name
    * @param {string} [options.template] The prompt html template injected to the bottom of body.
    * @param {string[]} [options.browsers] Browsers to support, overriding browserslist.
-   * @param {boolean} [options.promptOnNonTargetBrowser] If the current browser name doesn't match one of the
+   * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser name doesn't match one of the
    * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
    */
   constructor(options) {
@@ -23,6 +21,7 @@ class ObsoleteWebpackPlugin {
       ...defaultOptions,
       ...options,
     };
+    this.libraryPath = require.resolve('obsolete-web');
   }
   /**
    * Entrypoint of plugin.
@@ -48,7 +47,7 @@ class ObsoleteWebpackPlugin {
     }
 
     const webAsset = new WebAsset(
-      libraryPath,
+      this.libraryPath,
       compilation.outputOptions.filename
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);

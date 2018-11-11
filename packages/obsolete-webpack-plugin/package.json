@@ -1,0 +1,31 @@
+{
+  "name": "obsolete-webpack-plugin",
+  "version": "0.2.6",
+  "license": "MIT",
+  "description": "A webpack plugin generates a browser-side separate file that detects browser compatibility based on `Browserslist` and prompts website users to upgrade it.",
+  "keywords": [
+    "webpack",
+    "plugin",
+    "obsolete",
+    "obsolete-web",
+    "obsolete-webpack-plugin"
+  ],
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "browserslist": "^4.1.1",
+    "obsolete-web": "^0.1.0",
+    "webpack-sources": "^1.3.0"
+  },
+  "peerDependencies": {
+    "webpack": ">=4.0.0"
+  },
+  "bugs": "https://github.elenet.me/fe/obsolete-webpack-plugin/issues",
+  "homepage": "https://github.elenet.me/fe/obsolete-webpack-plugin",
+  "repository": "https://github.elenet.me/fe/obsolete-webpack-plugin.git",
+  "engines": {
+    "node": ">=7.6.0"
+  }
+}
