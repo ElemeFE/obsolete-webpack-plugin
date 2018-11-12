@@ -1,4 +1,4 @@
-# Obsolete Web &middot; [![npm](https://img.shields.io/npm/v/obsolete-web.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![licenses(https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
+# Obsolete Web &middot; [![npm](https://img.shields.io/npm/v/obsolete-web.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
 
 A library that detects browser compatibility and prompts website users to upgrade it.
 
