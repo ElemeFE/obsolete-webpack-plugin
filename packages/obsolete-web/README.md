@@ -1,4 +1,4 @@
-# Obsolete Web
+# Obsolete Web &middot; [![npm](https://img.shields.io/npm/v/obsolete-web.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![licenses(https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
 
 A library that detects browser compatibility and prompts website users to upgrade it.
 
@@ -33,19 +33,19 @@ new Obsolete().test(['ie 10', 'chrome 23'])
 
 #### Syntax
 
-> new Obsolete([option])
+> new Obsolete([options])
 
 #### Parameters
 
-- `[option]`
-  - `[option.template]` `{string}` The prompt html template injected to the bottom of body. The default value is: 
+- `options`
+  - `options.template` `{string}` The prompt html template injected to the bottom of body. The default value is:
     ```js
     `<div style="position: fixed; left: 0; top: 0; background: #fff">
       Your current browser is not supported, please upgrade it to the latest version.
       <button id="obsoleteClose">&times;</button>
     </div>`
     ```
-  - `[option.promptOnNonTargetBrowser=false]` `{boolean}` If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
+  - `options.promptOnNonTargetBrowser=false` `{boolean}` If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
 
 ### Methods
 
