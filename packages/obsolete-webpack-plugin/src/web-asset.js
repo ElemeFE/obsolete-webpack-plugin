@@ -54,13 +54,17 @@ class WebAsset {
    * @param {Object} context Variables populated to template.
    * @param {string[]} context.browsers Must be the output of `browserslist`.
    * @param {string} [context.template]
+   * @param {string} [context.position]
    * @param {boolean} [context.promptOnNonTargetBrowser]
+   * @param {boolean} [context.promptOnUnknownBrowser]
    * @returns {string}.
    */
   composeCode(context) {
     const options = {
       template: context.template,
+      position: context.position,
       promptOnNonTargetBrowser: context.promptOnNonTargetBrowser,
+      promptOnUnknownBrowser: context.promptOnUnknownBrowser,
     };
     const slimOptions = removeEmptyValues(options);
 

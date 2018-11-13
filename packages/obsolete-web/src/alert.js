@@ -3,8 +3,9 @@ class Alert {
    * Prompt message to user.
    *
    * @param {string} template
+   * @param {string} position
    */
-  prompt(template) {
+  prompt(template, position) {
     const fragment = document.createDocumentFragment();
     const placeholderElement = this.createElement('div');
     const refs = [];
@@ -15,7 +16,12 @@ class Alert {
       fragment.appendChild(placeholderElement.firstChild);
     }
     this.bindEvents(fragment, refs);
-    document.body.appendChild(fragment);
+    if (position === 'afterbegin') {
+      document.body.appendChild(fragment);
+    }
+    if (position === 'beforeend') {
+      document.body.insertBefore(fragment, document.body.firstChild);
+    }
   }
   /**
    * Bind events for close button.

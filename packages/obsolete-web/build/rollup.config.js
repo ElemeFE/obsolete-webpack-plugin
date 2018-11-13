@@ -18,14 +18,22 @@ export default {
           '@babel/env',
           {
             modules: false,
-            useBuiltIns: 'usage',
             targets: {
               browsers: '> 0%',
             },
           },
         ],
       ],
-      plugins: ['@babel/plugin-transform-property-mutators'],
+      plugins: [
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            corejs: 2,
+          },
+        ],
+        '@babel/plugin-transform-property-mutators',
+      ],
+      runtimeHelpers: true,
       exclude: '../../node_modules/**',
     }),
   ],

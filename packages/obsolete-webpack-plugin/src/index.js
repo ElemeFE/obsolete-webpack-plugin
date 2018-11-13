@@ -5,16 +5,24 @@ const WebAsset = require('./web-asset');
 class ObsoleteWebpackPlugin {
   /**
    * @param {Object} [options] Configuration.
-   * @param {string} [options.name='obsolete'] The chunk name
-   * @param {string} [options.template] The prompt html template injected to the bottom of body.
+   * @param {string} [options.name='obsolete'] The chunk name.
+   * @param {string} [options.template] The prompt html template.
+   * @param {string} [options.position='afterbegin'] If set 'afterbegin', the template will be injected
+   * into the start of body. If set 'beforeend', the template will be injected into the end of body.
    * @param {string[]} [options.browsers] Browsers to support, overriding browserslist.
-   * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser name doesn't match one of the
-   * target browsers, it's considered as unsupported. Thus, the prompt will be shown.
+   * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser useragent
+   * doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt
+   * will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't
+   * be shown on Chrome or Safari browser.
+   * @param {boolean} [options.promptOnUnknownBrowser=true] If the current browser useragent is
+   * unknown, the prompt will be shown.
    */
   constructor(options) {
     const defaultOptions = {
       name: 'obsolete',
+      position: 'afterbegin',
       promptOnNonTargetBrowser: false,
+      promptOnUnknownBrowser: true,
     };
 
     this.options = {
@@ -56,7 +64,9 @@ class ObsoleteWebpackPlugin {
     await webAsset.populate({
       browsers: browserslist(this.options.browsers),
       template,
+      position,
       promptOnNonTargetBrowser: this.options.promptOnNonTargetBrowser,
+      promptOnUnknownBrowser: this.options.promptOnUnknownBrowser,
     });
     webAsset.hash(this.options.name);
     this.connectEntrypointAndChunk(compilation, obsoleteChunk);

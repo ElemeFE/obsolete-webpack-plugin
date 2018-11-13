@@ -2,7 +2,7 @@ import Browser from './browser';
 
 class UAParser {
   constructor() {
-    this.rBrowsers = {
+    this.rBrowserMap = {
       /**
        * IE for desktop.
        *
@@ -78,19 +78,34 @@ class UAParser {
     };
   }
   /**
-   * Convert userAgent to the instance of `Browser`.
+   * Convert userAgent to a group of matched `Browser` instances.
    *
    * @param {string} userAgent
-   * @returns {Browser}
+   * @returns {Browser[]}
    */
   parse(userAgent) {
-    for (const [name, rBrowser] of Object.entries(this.rBrowsers)) {
-      const matches = rBrowser.exec(userAgent);
+    const browsers = [];
 
-      if (matches) {
-        return new Browser(name, matches[1], matches[2]);
+    Object.entries(this.rBrowserMap).forEach(([name, rBrowsers]) => {
+      let matches;
+
+      if (
+        rBrowsers.excludes &&
+        rBrowsers.excludes.some(rBrowser => rBrowser.exec(userAgent))
+      ) {
+        return;
       }
-    }
+      if (Array.isArray(rBrowsers) || rBrowsers.includes) {
+        for (const rBrowser of rBrowsers) {
+          matches = rBrowser.exec(userAgent);
+          if (matches) {
+            browsers.push(new Browser(name, matches[1], matches[2]));
+            break;
+          }
+        }
+      }
+    });
+    return browsers;
   }
 }
 

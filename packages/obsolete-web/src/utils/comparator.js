@@ -55,4 +55,4 @@ compareVersion.GT = 1;
 compareVersion.EQ = 0;
 compareVersion.LT = -1;
 
-export default compareVersion;
+export { compareVersion };
