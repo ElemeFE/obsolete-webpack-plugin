@@ -38,14 +38,13 @@ new Obsolete().test(['ie 10', 'chrome 23'])
 #### Parameters
 
 - `options`
-  - `options.template` `{string}` The prompt html template injected to the bottom of body. The default value is:
+  - `options.template` type: `string` The prompt html template injected to the bottom of body. The default value is:
     ```js
-    `<div style="position: fixed; left: 0; top: 0; background: #fff">
-      Your current browser is not supported, please upgrade it to the latest version.
-      <button id="obsoleteClose">&times;</button>
-    </div>`
+    '<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>'
     ```
-  - `options.promptOnNonTargetBrowser=false` `{boolean}` If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
+  - `options.position` type: `string` default: `'afterbegin'` If set `'afterbegin'`, the template will be injected into the start of body. If set `'beforeend'`, the template will be injected into the end of body.
+  - `options.promptOnNonTargetBrowser` type: `boolean` default: `false` If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
+  - `options.promptOnUnknownBrowser` type: `boolean` default: `true` If the current browser useragent is unknown, the prompt will be shown.
 
 ### Methods
 

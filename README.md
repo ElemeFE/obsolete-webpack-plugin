@@ -57,34 +57,43 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 `name`
 
-type: `{string}` default: `'obsolete'`
+type: `string` default: `'obsolete'`
 
 The chunk name.
 
 `template`
 
-type: `{string}` default:
+type: `string` default:
 
 ```js
-`<div style="position: fixed; left: 0; top: 0; background: #fff">
-  Your current browser is not supported, please upgrade it to the latest version.
-  <button id="obsoleteClose">&times;</button>
-</div>`
+'<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>'
 ```
 
-The prompt html template injected to the bottom of body.
+The prompt html template.
+
+`position`
+
+type: `string` default: `'afterbegin'`
+
+If set `'afterbegin'`, the template will be injected into the start of body. If set `'beforeend'`, the template will be injected into the end of body.
 
 `browsers`
 
-type: `{string[]}`
+type: `string[]`
 
 Browsers to support, overriding browserslist.
 
 `promptOnNonTargetBrowser`
 
-type: `{boolean}` default: `false`
+type: `boolean` default: `false`
 
-If the current browser name doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown.
+If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
+
+`promptOnUnknownBrowser`
+
+type: `boolean` default: `true`
+
+If the current browser useragent is unknown, the prompt will be shown.
 
 ## Browser Support :eyeglasses:
 
@@ -92,9 +101,9 @@ The name matches Browserslist queries.
 
 ### Desktop
 
-IE | Edge | Chrome | Safari | Firefox | Opera
-:-: | :-: | :-: | :-: | :-: | :-:
-![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png)
+IE | Edge | Chrome | Safari | Firefox | Opera | Electron 
+:-: | :-: | :-: | :-: | :-: | :-: | :-:
+![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/electron/electron_64x64.png)
 
 ### Mobile
 
