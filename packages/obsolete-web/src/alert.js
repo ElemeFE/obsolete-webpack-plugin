@@ -1,4 +1,7 @@
 class Alert {
+  constructor() {
+    this.refs = [];
+  }
   /**
    * Prompt message to user.
    *
@@ -8,14 +11,13 @@ class Alert {
   prompt(template, position) {
     const fragment = document.createDocumentFragment();
     const placeholderElement = this.createElement('div');
-    const refs = [];
 
     placeholderElement.innerHTML = template;
     while (placeholderElement.firstChild) {
-      refs.push(placeholderElement.firstChild);
+      this.refs.push(placeholderElement.firstChild);
       fragment.appendChild(placeholderElement.firstChild);
     }
-    this.bindEvents(fragment, refs);
+    this.bindEvents(fragment);
     if (position === 'afterbegin') {
       document.body.appendChild(fragment);
     }
@@ -27,33 +29,25 @@ class Alert {
    * Bind events for close button.
    *
    * @param {DocumentFragment} fragment
-   * @param {Node[]} fragmentChildNodes
    */
-  bindEvents(fragment, fragmentChildNodes) {
+  bindEvents(fragment) {
     const close = fragment.getElementById('obsoleteClose');
 
     if (!close) {
       return;
     }
     if (close.addEventListener) {
-      close.addEventListener(
-        'click',
-        this.handleClose.bind(this, fragmentChildNodes)
-      );
+      close.addEventListener('click', this.handleClose);
     } else if (close.attachEvent) {
-      close.attachEvent(
-        'onclick',
-        this.handleClose.bind(this, fragmentChildNodes)
-      );
+      close.attachEvent('onclick', this.handleClose);
     }
   }
   /**
    * Close event handler.
    *
-   * @param {Node[]} nodes
    */
-  handleClose(nodes) {
-    nodes.forEach(node => {
+  handleClose() {
+    this.refs.forEach(node => {
       node.parentNode.removeChild(node);
     });
   }

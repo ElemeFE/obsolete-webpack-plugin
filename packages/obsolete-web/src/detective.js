@@ -12,7 +12,12 @@ class Detective {
    * @param {boolean} promptOnUnknownBrowser
    * @returns {boolean}
    */
-  detect(userAgent, targetBrowsers, promptOnNonTargetBrowser) {
+  detect(
+    userAgent,
+    targetBrowsers,
+    promptOnNonTargetBrowser,
+    promptOnUnknownBrowser
+  ) {
     const currentBrowsers = new UAParser().parse(userAgent);
 
     if (!currentBrowsers.length) {

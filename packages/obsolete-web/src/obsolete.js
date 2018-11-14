@@ -29,9 +29,6 @@ class Obsolete {
     };
     this.detective = new Detective();
     this.alert = null;
-    this.alert2 = new Map();
-    this.alert23 = new Set();
-    this.alert234 = new Promise();
   }
   /**
    * Test browser compatibility.
@@ -40,6 +37,10 @@ class Obsolete {
    * @returns {boolean}
    */
   test(browsers) {
+    if (!browsers.length) {
+      throw new Error('Parameter `browsers` is empty.');
+    }
+
     const passed = this.detective.detect(
       navigator.userAgent,
       browsers,
@@ -48,7 +49,9 @@ class Obsolete {
     );
 
     if (!passed) {
-      if (!this.alert) {
+      if (this.alert) {
+        this.alert.handleClose();
+      } else {
         this.alert = new Alert();
       }
       this.alert.prompt(this.options.template, this.options.position);

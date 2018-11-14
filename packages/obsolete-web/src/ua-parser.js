@@ -95,13 +95,14 @@ class UAParser {
       ) {
         return;
       }
-      if (Array.isArray(rBrowsers) || rBrowsers.includes) {
-        for (const rBrowser of rBrowsers) {
-          matches = rBrowser.exec(userAgent);
-          if (matches) {
-            browsers.push(new Browser(name, matches[1], matches[2]));
-            break;
-          }
+      if (!Array.isArray(rBrowsers)) {
+        rBrowsers = rBrowsers.includes;
+      }
+      for (const rBrowser of rBrowsers) {
+        matches = rBrowser.exec(userAgent);
+        if (matches) {
+          browsers.push(new Browser(name, matches[1], matches[2]));
+          break;
         }
       }
     });
