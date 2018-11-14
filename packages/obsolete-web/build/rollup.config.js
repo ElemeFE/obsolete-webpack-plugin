@@ -13,26 +13,6 @@ export default {
     resolve(),
     commonjs(),
     babel({
-      presets: [
-        [
-          '@babel/env',
-          {
-            modules: false,
-            targets: {
-              browsers: '> 0%',
-            },
-          },
-        ],
-      ],
-      plugins: [
-        [
-          '@babel/plugin-transform-runtime',
-          {
-            corejs: 2,
-          },
-        ],
-        '@babel/plugin-transform-property-mutators',
-      ],
       runtimeHelpers: true,
       exclude: '../../node_modules/**',
     }),
