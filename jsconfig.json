@@ -2,5 +2,8 @@
   "compilerOptions": {
     "target": "esnext"
   },
-  "exclude": ["packages/obsolete-web/dist"]
+  "exclude": [
+    "**/node_modules",
+    "**/dist"
+  ]
 }
