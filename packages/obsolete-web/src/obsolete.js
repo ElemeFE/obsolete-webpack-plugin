@@ -3,8 +3,8 @@ import Alert from './alert';
 
 class Obsolete {
   /**
-   * @param {Object} [options] Configuration.
-   * @param {string} [options.template] The prompt html template.
+   * @param {Object} [options]
+   * @param {string} [options.template] The prompt html template. It accepts any document fragment.
    * @param {string} [options.position='afterbegin'] If set 'afterbegin', the template will be injected
    * into the start of body. If set 'beforeend', the template will be injected into the end of body.
    * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser useragent

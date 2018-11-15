@@ -55,45 +55,14 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 ### Options
 
-`name`
-
-type: `string` default: `'obsolete'`
-
-The chunk name.
-
-`template`
-
-type: `string` default:
-
-```js
-'<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>'
-```
-
-The prompt html template.
-
-`position`
-
-type: `string` default: `'afterbegin'`
-
-If set `'afterbegin'`, the template will be injected into the start of body. If set `'beforeend'`, the template will be injected into the end of body.
-
-`browsers`
-
-type: `string[]`
-
-Browsers to support, overriding browserslist.
-
-`promptOnNonTargetBrowser`
-
-type: `boolean` default: `false`
-
-If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
-
-`promptOnUnknownBrowser`
-
-type: `boolean` default: `true`
-
-If the current browser useragent is unknown, the prompt will be shown.
+| Name | Type | Default | Description
+| :-: | :-: | :-: | :-:
+| name | string | `'obsolete'` | The chunk name.
+| template | string | `'<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>'` | The prompt html template. It accepts any document fragment. E.g., `'<style>...</style><div>...</div><script>...</script>'`.
+| position | string | `'afterbegin'` | If set `'afterbegin'`, the template will be injected into the start of body. <br>If set `'beforeend'`, the template will be injected into the end of body.
+| browsers | string[] | | Browsers to support, overriding global browserslist configuration.
+| promptOnNonTargetBrowser | boolean | `false` | If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
+| promptOnUnknownBrowser | boolean | `true` | If the current browser useragent is unknown, the prompt will be shown.
 
 ## Browser Support :eyeglasses:
 
@@ -107,8 +76,12 @@ IE | Edge | Chrome | Safari | Firefox | Opera | Electron
 
 ### Mobile
 
-ChromeAndroid | FirefoxAndroid | Android 5+<br>(WebView) | iOS
+ChromeAndroid | FirefoxAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 :-: | :-: | :-: | :-:
 ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
 
 ## FAQ :tea:
+
+Q: Does plugin support Yandex, Maxthon, UC or QQ browser?
+
+A: Yep. Plugin support those browsers based on the mainstream browser kernel, such as Chromium based browser, Mozilla based browser. In other words, `Chrome >= 30` will be also applied to Yandex browser, `ChromeAndroid >= 30` will be also applied to Android UC browser.

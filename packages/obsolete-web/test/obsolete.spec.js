@@ -139,7 +139,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass AndroidChrome', () => {
+    it('should pass ChromeAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36'
       );
@@ -150,7 +150,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass AndroidFirefox', () => {
+    it('should pass FirefoxAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Android; Mobile; rv:38.0) Gecko/38.0 Firefox/38.0'
       );
@@ -245,7 +245,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass AndroidUC', () => {
+    it('should pass UCAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; U; Android 8.1.0; zh-CN; OE106 Build/OPM1.171019.026) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.108 UCBrowser/12.1.8.998 Mobile Safari/537.36'
       );
@@ -256,7 +256,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass AndroidQQ', () => {
+    it('should pass QQAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; U; Android 8.1.0; en-us; OE106 Build/OPM1.171019.026) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.132 MQQBrowser/8.9 Mobile Safari/537.36'
       );

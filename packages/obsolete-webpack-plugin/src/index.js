@@ -4,12 +4,12 @@ const WebAsset = require('./web-asset');
 
 class ObsoleteWebpackPlugin {
   /**
-   * @param {Object} [options] Configuration.
+   * @param {Object} [options]
    * @param {string} [options.name='obsolete'] The chunk name.
-   * @param {string} [options.template] The prompt html template.
+   * @param {string} [options.template] The prompt html template. It accepts any document fragment.
    * @param {string} [options.position='afterbegin'] If set 'afterbegin', the template will be injected
    * into the start of body. If set 'beforeend', the template will be injected into the end of body.
-   * @param {string[]} [options.browsers] Browsers to support, overriding browserslist.
+   * @param {string[]} [options.browsers] Browsers to support, overriding global browserslist configuration.
    * @param {boolean} [options.promptOnNonTargetBrowser=false] If the current browser useragent
    * doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt
    * will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't
