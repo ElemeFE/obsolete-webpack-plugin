@@ -6,8 +6,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "clean": "rm -rf **/node_modules **/dist",
-    "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm run build"
+    "clean": "rm -rf node_modules **/node_modules **/dist",
+    "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm test && npm run build"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
