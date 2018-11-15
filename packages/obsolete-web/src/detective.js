@@ -55,14 +55,28 @@ class Detective {
    * @returns {Browser[]}
    */
   normalizeTargetBrowsers(targetBrowsers) {
-    const rBrowser = /(\w+) (([\d\.]+)(?:-[\d\.]+)?|all)/;
+    const rBrowser = /(\w+) (([\d\.]+)(?:-[\d\.]+)?)/;
     const rawTargetBrowsers = targetBrowsers.map(browser => {
-      const matches = rBrowser.exec(browser);
+      const matches = rBrowser.exec(this.mapAlias(browser));
 
-      return new Browser(matches[1], matches[2], matches[3] || '0');
+      return new Browser(matches[1], matches[2], matches[3]);
     });
 
     return this.getLowestVersionBrowsers(rawTargetBrowsers);
+  }
+  /**
+   * Normalize target browsers to a group of `Browser` instances.
+   *
+   * @param {string} targetBrowser
+   * @returns {string}
+   */
+  mapAlias(targetBrowser) {
+    return (
+      {
+        'op_mini all': 'op_mini 0',
+        'safari TP': 'safari 99',
+      }[targetBrowser] || targetBrowser
+    );
   }
   /**
    * Get the lowest versrin browsers from the list.
