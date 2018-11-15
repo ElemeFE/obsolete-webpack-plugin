@@ -5,7 +5,7 @@ module.exports = {
       {
         modules: false,
         targets: {
-          browsers: '> 0%',
+          browsers: '>= 0%',
         },
       },
     ],
