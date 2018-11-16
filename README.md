@@ -35,7 +35,7 @@ module.exports = {
 
 ### Best Practice
 
-To improve first page load speed, you should reduce render-blocking scripts as far as possible. For non-critical script, it's best to mark them with the `async` attribute. Thanks to [script-ext-html-webpack-plugin](//github.com/numical/script-ext-html-webpack-plugin), we are able to achieve this goal easily.
+To improve first page load speed, you should always reduce render-blocking scripts as far as possible. For non-critical script, it's best to mark them with the `async` attribute. Thanks to [script-ext-html-webpack-plugin](//github.com/numical/script-ext-html-webpack-plugin), we are able to achieve this goal easily.
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
