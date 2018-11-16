@@ -1,6 +1,6 @@
-# Obsolete Webpack Plugin &middot; [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
+# Obsolete Webpack Plugin &middot; [![npm](//img.shields.io/npm/v/obsolete-webpack-plugin.svg)](//npmjs.com/package/obsolete-webpack-plugin) [![node](//img.shields.io/node/v/obsolete-webpack-plugin.svg)](//nodejs.org) [![licenses](//img.shields.io/npm/l/obsolete-webpack-plugin.svg)](//github.elenet.me/fe/obsolete-webpack-plugin/blob/master/LICENSE)
 
-A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
+A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](//github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
 ## Getting Started :rocket:
 
@@ -17,28 +17,33 @@ $ npm i -D obsolete-webpack-plugin
 
 ### Basic Usage
 
-```js
-const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
-```
+Apply the plugin in your Webpack configuration, often used together with [html-webpack-plugin](//github.com/jantimon/html-webpack-plugin). By the way, the putting order of plugins is irrelevant.
 
 ```js
-{
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
+
+module.exports = {
+  // ...
   plugins: [
+    // ...
+    new HtmlWebpackPlugin(),
     new ObsoleteWebpackPlugin()
   ]
-}
+};
 ```
 
 ### Best Practice
+
+To improve first page load speed, you should reduce render-blocking scripts as far as possible. For non-critical script, it's best to mark them with the `async` attribute. Thanks to [script-ext-html-webpack-plugin](//github.com/numical/script-ext-html-webpack-plugin), we are able to achieve this goal easily.
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ObsoleteWebpackPlugin = require('obsolete-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-```
 
-```js
-{
+module.exports = {
+  // ...
   plugins: [
     new HtmlWebpackPlugin(),
     new ObsoleteWebpackPlugin({
@@ -48,7 +53,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
       async: 'obsolete'
     })
   ]
-}
+};
 ```
 
 ## Configuration :art:
@@ -72,13 +77,13 @@ The name matches Browserslist queries.
 
 IE | Edge | Chrome | Safari | Firefox | Opera | Electron 
 :-: | :-: | :-: | :-: | :-: | :-: | :-:
-![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/electron/electron_64x64.png)
+![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/electron/electron_64x64.png)
 
 ### Mobile
 
 ChromeAndroid | FirefoxAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 :-: | :-: | :-: | :-:
-![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
+![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
 
 ## FAQ :tea:
 
