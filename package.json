@@ -26,10 +26,11 @@
     "lerna": "^3.4.3",
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
-    "rollup": "^0.65.2",
+    "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.1.6",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
