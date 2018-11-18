@@ -6,7 +6,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "clean": "rm -rf node_modules **/node_modules **/dist",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist",
     "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm test && npm run build"
   },
   "devDependencies": {
