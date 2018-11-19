@@ -1,6 +1,6 @@
 # Obsolete Webpack Plugin &middot; [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/elemefe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
 
-A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](//github.com/browserslist/browserslist) and prompts website users to upgrade it.
+A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
 ## Getting Started :rocket:
 
@@ -17,7 +17,7 @@ $ npm i -D obsolete-webpack-plugin
 
 ### Basic Usage
 
-Apply the plugin in your Webpack configuration, often used together with [html-webpack-plugin](//github.com/jantimon/html-webpack-plugin). By the way, the putting order of plugins is irrelevant.
+Apply the plugin in your Webpack configuration, often used together with [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin). By the way, the putting order of plugins is irrelevant.
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -35,7 +35,7 @@ module.exports = {
 
 ### Best Practice
 
-To improve first page load speed, you should always reduce render-blocking scripts as far as possible. For non-critical script, it's best to mark them with the `async` attribute. Thanks to [script-ext-html-webpack-plugin](//github.com/numical/script-ext-html-webpack-plugin), we are able to achieve this goal easily.
+To improve first page load speed, you should always reduce render-blocking scripts as far as possible. For non-critical script, it's best to mark them with the `async` attribute. Thanks to [script-ext-html-webpack-plugin](https://github.com/numical/script-ext-html-webpack-plugin), we are able to achieve this goal easily.
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -77,13 +77,13 @@ The name matches Browserslist queries.
 
 IE | Edge | Chrome | Safari | Firefox | Opera | Electron 
 :-: | :-: | :-: | :-: | :-: | :-: | :-:
-![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/electron/electron_64x64.png)
+![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/archive/internet-explorer_9-11/internet-explorer_9-11_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/edge/edge_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari/safari_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/opera/opera_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/electron/electron_64x64.png)
 
 ### Mobile
 
 ChromeAndroid | FirefoxAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 :-: | :-: | :-: | :-:
-![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](//cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
+![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
 
 ## FAQ :tea:
 
