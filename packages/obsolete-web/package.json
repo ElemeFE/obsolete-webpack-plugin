@@ -7,9 +7,12 @@
     "obsolete",
     "obsolete-web"
   ],
-  "main": "dist/obsolete.js",
+  "main": "cjs/obsolete.js",
+  "module": "esm/obsolete.js",
+  "sideEffects": false,
   "files": [
-    "src",
+    "cjs",
+    "esm",
     "dist"
   ],
   "bugs": "https://github.elenet.me/fe/obsolete-webpack-plugin/issues",

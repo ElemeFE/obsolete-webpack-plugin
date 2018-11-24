@@ -3,10 +3,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import { uglify } from 'rollup-plugin-uglify';
 
-const config = ['obsolete', 'obsolete.min'].map(name => ({
+const config = ['js', 'min.js'].map(extname => ({
   input: 'src/obsolete.js',
   output: {
-    file: `dist/${name}.js`,
+    file: `dist/obsolete.${extname}`,
     format: 'umd',
     name: 'Obsolete',
   },
@@ -17,7 +17,7 @@ const config = ['obsolete', 'obsolete.min'].map(name => ({
       runtimeHelpers: true,
       exclude: '../../node_modules/**',
     }),
-    ...(name.includes('min') ? [uglify()] : []),
+    ...(extname.includes('min') ? [uglify()] : []),
   ],
 }));
 

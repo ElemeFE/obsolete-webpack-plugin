@@ -3,13 +3,17 @@
   "scripts": {
     "bootstrap": "npm install && lerna bootstrap",
     "build": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
+    "build:cjs": "cd packages/obsolete-web && babel --out-dir cjs src",
+    "build:esm": "cd packages/obsolete-web && babel --out-dir esm src",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "clean": "rm -rf node_modules packages/*/node_modules packages/*/dist",
-    "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm test && npm run build"
+    "clean": "rm -rf packages/*/{dist,cjs,esm}",
+    "clean:all": "npm run clean && rm -rf node_modules packages/*/node_modules",
+    "prepublishOnly": "npm run clean:all && npm run bootstrap && npm run lint && npm test && npm run build && npm run build:cjs && npm run build:esm"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-property-mutators": "^7.1.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
