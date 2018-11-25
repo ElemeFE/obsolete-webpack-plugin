@@ -3,8 +3,8 @@
   "scripts": {
     "bootstrap": "npm install && lerna bootstrap",
     "build": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
-    "build:cjs": "cd packages/obsolete-web && babel --out-dir cjs src",
-    "build:esm": "cd packages/obsolete-web && babel --out-dir esm src",
+    "build:cjs": "cd packages/obsolete-web && BABEL_ENV=cjs babel --out-dir cjs src",
+    "build:esm": "cd packages/obsolete-web && BABEL_ENV=esm babel --out-dir esm src",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",

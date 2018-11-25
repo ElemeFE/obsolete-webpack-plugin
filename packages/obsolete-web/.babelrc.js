@@ -32,5 +32,31 @@ module.exports = {
         ],
       ],
     },
+    cjs: {
+      presets: [
+        [
+          '@babel/env',
+          {
+            modules: 'commonjs',
+            targets: {
+              browsers: '> 0%',
+            },
+          },
+        ],
+      ],
+    },
+    esm: {
+      presets: [
+        [
+          '@babel/env',
+          {
+            modules: false,
+            targets: {
+              browsers: '> 0%',
+            },
+          },
+        ],
+      ],
+    },
   },
 };
