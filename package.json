@@ -2,15 +2,17 @@
   "private": true,
   "scripts": {
     "bootstrap": "npm install && lerna bootstrap",
-    "build": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
-    "build:cjs": "cd packages/obsolete-web && BABEL_ENV=cjs babel --out-dir cjs src",
-    "build:esm": "cd packages/obsolete-web && BABEL_ENV=esm babel --out-dir esm src",
+    "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
+    "build:umd": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
+    "build:cjs": "cd packages/obsolete-web && cross-env BABEL_ENV=cjs babel --out-dir cjs src",
+    "build:esm": "cd packages/obsolete-web && cross-env BABEL_ENV=esm babel --out-dir esm src",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
-    "clean": "rm -rf packages/*/{dist,cjs,esm}",
-    "clean:all": "npm run clean && rm -rf node_modules packages/*/node_modules",
-    "prepublishOnly": "npm run clean:all && npm run bootstrap && npm run lint && npm test && npm run build && npm run build:cjs && npm run build:esm"
+    "clean": "npm run clean:build && npm run clean:deps",
+    "clean:build": "del packages/*/{dist,cjs,esm}",
+    "clean:deps": "del **/node_modules",
+    "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm test && npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -23,6 +25,8 @@
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "cross-env": "^5.2.0",
+    "del-cli": "^1.1.0",
     "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-prettier": "^2.6.2",

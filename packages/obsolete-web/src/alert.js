@@ -1,3 +1,5 @@
+import { forEach, entries } from './lib/mini-built-ins';
+
 class Alert {
   constructor() {
     this.refs = [];
@@ -47,7 +49,7 @@ class Alert {
    *
    */
   handleClose() {
-    this.refs.forEach(node => {
+    forEach(this.refs, node => {
       node.parentNode.removeChild(node);
     });
   }
@@ -62,7 +64,7 @@ class Alert {
     const element = document.createElement(tag);
 
     if (attributes) {
-      Object.entries(attributes).forEach(([key, value]) => {
+      forEach(entries(attributes), ([key, value]) => {
         element.setAttribute(key, value);
       });
     }

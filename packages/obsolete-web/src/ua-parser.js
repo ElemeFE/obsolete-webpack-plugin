@@ -1,4 +1,5 @@
 import Browser from './browser';
+import { forEach, entries } from './lib/mini-built-ins';
 
 class UAParser {
   constructor() {
@@ -83,7 +84,7 @@ class UAParser {
   parse(userAgent) {
     const browsers = [];
 
-    Object.entries(this.rBrowserMap).forEach(([name, rBrowsers]) => {
+    forEach(entries(this.rBrowserMap), ([name, rBrowsers]) => {
       let matches;
 
       if (
@@ -92,11 +93,11 @@ class UAParser {
       ) {
         return;
       }
-      if (!Array.isArray(rBrowsers)) {
+      if (Object.prototype.toString.call(rBrowsers) !== '[object Array]') {
         rBrowsers = rBrowsers.includes;
       }
-      for (const rBrowser of rBrowsers) {
-        matches = rBrowser.exec(userAgent);
+      for (const i in rBrowsers) {
+        matches = rBrowsers[i].exec(userAgent);
         if (matches) {
           browsers.push(
             new Browser(

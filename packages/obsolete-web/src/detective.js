@@ -1,6 +1,7 @@
 import UAParser from './ua-parser';
 import Browser from './browser';
-import { compareVersion } from './utils/comparator';
+import { compareVersion } from './lib/comparator';
+import { filter, map, some, includes, values } from './lib/mini-built-ins';
 
 class Detective {
   /**
@@ -27,18 +28,21 @@ class Detective {
     const normalizedTargetBrowsers = this.normalizeTargetBrowsers(
       targetBrowsers
     );
-    const normalizedTargetBrowsersOfTheSameName = normalizedTargetBrowsers.filter(
+    const normalizedTargetBrowsersOfTheSameName = filter(
+      normalizedTargetBrowsers,
       targetBrowser =>
-        currentBrowsers
-          .map(currentBrowser => currentBrowser.name)
-          .includes(targetBrowser.name)
+        includes(
+          map(currentBrowsers, currentBrowser => currentBrowser.name),
+          targetBrowser.name
+        )
     );
 
     if (!normalizedTargetBrowsersOfTheSameName.length) {
       return !promptOnNonTargetBrowser;
     }
-    return normalizedTargetBrowsersOfTheSameName.some(targetBrowser =>
-      currentBrowsers.some(
+    return some(normalizedTargetBrowsersOfTheSameName, targetBrowser =>
+      some(
+        currentBrowsers,
         currentBrowser =>
           currentBrowser.name === targetBrowser.name &&
           compareVersion(
@@ -55,8 +59,8 @@ class Detective {
    * @returns {Browser[]}
    */
   normalizeTargetBrowsers(targetBrowsers) {
-    const rBrowser = /(\w+) (([\d\.]+)(?:-[\d\.]+)?)/;
-    const rawTargetBrowsers = targetBrowsers.map(browser => {
+    const rBrowser = /(\w+) (([\d.]+)(?:-[\d.]+)?)/;
+    const rawTargetBrowsers = map(targetBrowsers, browser => {
       const matches = rBrowser.exec(this.mapAlias(browser));
 
       return new Browser(matches[1], matches[2], matches[3]);
@@ -87,10 +91,10 @@ class Detective {
   getLowestVersionBrowsers(browsers) {
     const lowestVersionMap = {};
 
-    for (const browser of browsers) {
+    browsers.forEach(browser => {
       if (!lowestVersionMap[browser.name]) {
         lowestVersionMap[browser.name] = browser;
-        continue;
+        return;
       }
       if (
         compareVersion(
@@ -100,8 +104,8 @@ class Detective {
       ) {
         lowestVersionMap[browser.name] = browser;
       }
-    }
-    return Object.values(lowestVersionMap);
+    });
+    return values(lowestVersionMap);
   }
 }
 

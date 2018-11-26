@@ -1,4 +1,3 @@
-const { resolve } = require('path');
 const browserslist = require('browserslist');
 const WebAsset = require('./web-asset');
 
@@ -64,7 +63,7 @@ class ObsoleteWebpackPlugin {
     await webAsset.populate({
       browsers: browserslist(this.options.browsers),
       template,
-      position,
+      position: this.options.position,
       promptOnNonTargetBrowser: this.options.promptOnNonTargetBrowser,
       promptOnUnknownBrowser: this.options.promptOnUnknownBrowser,
     });

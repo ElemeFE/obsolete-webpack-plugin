@@ -7,7 +7,9 @@ function validateSemantic(version) {
   const rValidator = /^(\d+)(\.\d+)*$/;
 
   if (!rValidator.test(version)) {
-    throw new Error(`The argument \`${version}\` isn't a semantic version.`);
+    throw new Error(
+      `Parameter \`version\` \`${version}\` isn't a semantic version.`
+    );
   }
 }
 /**
@@ -25,6 +27,7 @@ function compareVersion(version, comparedVersion) {
   [version, comparedVersion].forEach(version => {
     validateSemantic(version);
   });
+
   while (true) {
     const matches = rVersion.exec(version);
     const comparedMatches = rComparedVersion.exec(comparedVersion);
