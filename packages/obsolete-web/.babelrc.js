@@ -4,6 +4,7 @@ module.exports = {
       '@babel/env',
       {
         modules: false,
+        loose: true,
         targets: {
           browsers: '>= 0%',
         },
