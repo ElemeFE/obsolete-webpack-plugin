@@ -15,9 +15,26 @@ class Alert {
     const placeholderElement = this.createElement('div');
 
     placeholderElement.innerHTML = template;
-    while (placeholderElement.firstChild) {
-      this.refs.push(placeholderElement.firstChild);
-      fragment.appendChild(placeholderElement.firstChild);
+    while (true) {
+      const firstChild = placeholderElement.firstChild;
+
+      if (!firstChild) {
+        break;
+      }
+      if (
+        firstChild.nodeType === Node.ELEMENT_NODE &&
+        firstChild.nodeName === 'SCRIPT'
+      ) {
+        const script = this.createElement('script');
+
+        script.innerHTML = firstChild.innerHTML;
+        fragment.appendChild(script);
+        this.refs.push(script);
+        placeholderElement.removeChild(firstChild);
+      } else {
+        fragment.appendChild(firstChild);
+        this.refs.push(firstChild);
+      }
     }
     this.bindEvents(fragment);
     if (position === 'afterbegin') {
