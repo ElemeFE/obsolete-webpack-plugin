@@ -1,6 +1,6 @@
 {
   "name": "obsolete-webpack-plugin",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "license": "MIT",
   "description": "A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on `Browserslist` and prompts website users to upgrade it.",
   "keywords": [
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "browserslist": "^4.0.0",
-    "obsolete-web": "^0.4.6",
+    "obsolete-web": "^0.4.7",
     "webpack-sources": "^1.0.0"
   },
   "peerDependencies": {
