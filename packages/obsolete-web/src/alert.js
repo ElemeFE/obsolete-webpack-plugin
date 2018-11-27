@@ -21,10 +21,10 @@ class Alert {
     }
     this.bindEvents(fragment);
     if (position === 'afterbegin') {
-      document.body.appendChild(fragment);
+      document.body.insertBefore(fragment, document.body.firstChild);
     }
     if (position === 'beforeend') {
-      document.body.insertBefore(fragment, document.body.firstChild);
+      document.body.appendChild(fragment);
     }
   }
   /**

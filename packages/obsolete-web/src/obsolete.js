@@ -2,6 +2,14 @@ import Detective from './detective';
 import Alert from './alert';
 
 class Obsolete {
+  static defaultOptions = {
+    template:
+      '<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>',
+    position: 'afterbegin',
+    promptOnNonTargetBrowser: false,
+    promptOnUnknownBrowser: true,
+  };
+
   /**
    * @param {Object} [options]
    * @param {string} [options.template] The prompt html template. It accepts any document fragment.
@@ -15,16 +23,8 @@ class Obsolete {
    * unknown, the prompt will be shown.
    */
   constructor(options) {
-    const defaultOptions = {
-      template:
-        '<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>',
-      position: 'afterbegin',
-      promptOnNonTargetBrowser: false,
-      promptOnUnknownBrowser: true,
-    };
-
     this.options = {
-      ...defaultOptions,
+      ...Obsolete.defaultOptions,
       ...options,
     };
     this.detective = new Detective();

@@ -19,6 +19,7 @@ module.exports = {
       },
     ],
     '@babel/plugin-transform-property-mutators',
+    '@babel/plugin-proposal-class-properties',
   ],
   env: {
     test: {
@@ -26,6 +27,7 @@ module.exports = {
         [
           '@babel/env',
           {
+            modules: 'commonjs',
             targets: {
               browsers: '> 0%',
             },

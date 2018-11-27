@@ -12,11 +12,11 @@ const config = ['js', 'min.js'].map(extname => ({
   },
   plugins: [
     resolve(),
-    commonjs(),
     babel({
       runtimeHelpers: true,
       exclude: '../../node_modules/**',
     }),
+    commonjs(),
     ...(extname.includes('min') ? [uglify()] : []),
   ],
 }));

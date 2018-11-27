@@ -16,12 +16,14 @@ function getBasicBrowsers(excludes = []) {
     basicBrowser => !excludes.every(exclude => basicBrowser.includes(exclude))
   );
 }
-
 function setUserAgent(useragent) {
   Object.defineProperty(navigator, 'userAgent', {
     value: useragent,
     configurable: true,
   });
 }
+function unescape(html) {
+  return html.replace('&times;', '×');
+}
 
-export { getBasicBrowsers, setUserAgent };
+export { getBasicBrowsers, setUserAgent, unescape };

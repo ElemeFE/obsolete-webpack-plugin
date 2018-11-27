@@ -100,7 +100,7 @@ class Detective {
         compareVersion(
           browser.primaryVersion,
           lowestVersionMap[browser.name].primaryVersion
-        ) === compareVersion.GT
+        ) === compareVersion.LT
       ) {
         lowestVersionMap[browser.name] = browser;
       }

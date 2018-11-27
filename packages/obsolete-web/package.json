@@ -15,6 +15,9 @@
     "esm",
     "dist"
   ],
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.0.0"
+  },
   "bugs": "https://github.elenet.me/fe/obsolete-webpack-plugin/issues",
   "homepage": "https://github.elenet.me/fe/obsolete-webpack-plugin",
   "repository": "https://github.elenet.me/fe/obsolete-webpack-plugin.git"

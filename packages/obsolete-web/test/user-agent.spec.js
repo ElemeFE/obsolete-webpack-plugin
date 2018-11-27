@@ -1,20 +1,17 @@
 import { setUserAgent, getBasicBrowsers } from './suites/browser';
 import Obsolete from '../src/obsolete';
 
-describe('obsolete-web', () => {
-  const initialUserAgent = navigator.userAgent;
+describe('user-agent', () => {
+  const originalUserAgent = navigator.userAgent;
+  let obsolete;
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    setUserAgent(initialUserAgent);
+    setUserAgent(originalUserAgent);
+    obsolete = new Obsolete();
   });
   describe('test self user agent', () => {
-    let obsolete;
-
-    beforeEach(() => {
-      obsolete = new Obsolete();
-    });
-    it('should pass old IE', () => {
+    test('should pass old IE', () => {
       setUserAgent('Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1');
       expect(obsolete.test(['ie 5.5'])).toBe(true);
       expect(obsolete.test(['ie 6'])).toBe(true);
@@ -23,7 +20,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass IE', () => {
+    test('should pass IE', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:10.0) like Gecko'
       );
@@ -34,7 +31,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Edge', () => {
+    test('should pass Edge', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.9200'
       );
@@ -45,7 +42,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Chrome', () => {
+    test('should pass Chrome', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3538.77 Safari/537.36'
       );
@@ -56,7 +53,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Safari', () => {
+    test('should pass Safari', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.0 Safari/605.1.15'
       );
@@ -68,7 +65,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Firefox', () => {
+    test('should pass Firefox', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:63.0) Gecko/20100101 Firefox/60.0'
       );
@@ -79,7 +76,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass old Opera', () => {
+    test('should pass old Opera', () => {
       setUserAgent('Opera/9.63 (Windows NT 6.0; U; en) Presto/2.1.1');
       expect(obsolete.test(['opera 9'])).toBe(true);
       expect(obsolete.test(['opera 9.5-9.6'])).toBe(true);
@@ -97,7 +94,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Opera', () => {
+    test('should pass Opera', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 OPR/56.0.3051.52'
       );
@@ -108,7 +105,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Android', () => {
+    test('should pass Android', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36'
       );
@@ -119,7 +116,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass iOS', () => {
+    test('should pass iOS', () => {
       setUserAgent(
         'Mozilla/5.0 (iPad; CPU OS 11_0_3 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A432 Safari/604.1'
       );
@@ -139,7 +136,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass ChromeAndroid', () => {
+    test('should pass ChromeAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36'
       );
@@ -150,7 +147,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass FirefoxAndroid', () => {
+    test('should pass FirefoxAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Android; Mobile; rv:38.0) Gecko/38.0 Firefox/38.0'
       );
@@ -163,12 +160,7 @@ describe('obsolete-web', () => {
     });
   });
   describe('test engine based user agent', () => {
-    let obsolete;
-
-    beforeEach(() => {
-      obsolete = new Obsolete();
-    });
-    it('should pass QQ', () => {
+    test('should pass QQ', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36 QQBrowser/4.4.116.400'
       );
@@ -179,7 +171,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass 360', () => {
+    test('should pass 360', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
       );
@@ -190,7 +182,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Maxthon', () => {
+    test('should pass Maxthon', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4 Chrome/45.0.2454.85 Safari/537.36'
       );
@@ -201,7 +193,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Yandex', () => {
+    test('should pass Yandex', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 YaBrowser/15.7.2357.2877 Safari/537.36'
       );
@@ -212,7 +204,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass SeaMonkey', () => {
+    test('should pass SeaMonkey', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0 SeaMonkey/2.35'
       );
@@ -223,7 +215,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass Facebook', () => {
+    test('should pass Facebook', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; Android 8.1.0; OE106 Build/OPM1.171019.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/62.0.3202.84 Mobile Safari/537.36'
       );
@@ -234,7 +226,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass WeChat', () => {
+    test('should pass WeChat', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; Android 8.1; OE106 Build/OPM1.171019.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.132 MQQBrowser/6.2 TBS/044306 Mobile Safari/537.36'
       );
@@ -245,7 +237,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass UCAndroid', () => {
+    test('should pass UCAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; U; Android 8.1.0; zh-CN; OE106 Build/OPM1.171019.026) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.108 UCBrowser/12.1.8.998 Mobile Safari/537.36'
       );
@@ -256,7 +248,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass QQAndroid', () => {
+    test('should pass QQAndroid', () => {
       setUserAgent(
         'Mozilla/5.0 (Linux; U; Android 8.1.0; en-us; OE106 Build/OPM1.171019.026) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.132 MQQBrowser/8.9 Mobile Safari/537.36'
       );
@@ -268,13 +260,46 @@ describe('obsolete-web', () => {
       });
     });
   });
-  describe('test unknown user agent', () => {
-    let obsolete;
-
-    beforeEach(() => {
-      obsolete = new Obsolete();
+  describe('test multiple target browsers', () => {
+    test('should pass IE', () => {
+      setUserAgent(
+        'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:10.0) like Gecko'
+      );
+      expect(obsolete.test(['ie 9', 'chrome 30'])).toBe(true);
+      expect(obsolete.test(['ie 10', 'chrome 30'])).toBe(true);
+      expect(obsolete.test(['ie 11', 'chrome 30'])).toBe(false);
     });
-    it('should not pass jsdom', () => {
+    test('should pass Chrome', () => {
+      setUserAgent(
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3538.77 Safari/537.36'
+      );
+      expect(obsolete.test(['ie 9', 'chrome 59'])).toBe(true);
+      expect(obsolete.test(['ie 9', 'chrome 60'])).toBe(true);
+      expect(obsolete.test(['ie 9', 'chrome 61'])).toBe(false);
+    });
+  });
+  describe('test duplicate name target browsers', () => {
+    test('should pass IE', () => {
+      setUserAgent(
+        'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:10.0) like Gecko'
+      );
+      expect(obsolete.test(['ie 9', 'ie 10', 'ie 11'])).toBe(true);
+      expect(obsolete.test(['ie 10', 'ie 11'])).toBe(true);
+      expect(obsolete.test(['ie 11'])).toBe(false);
+    });
+    test('should pass Chrome', () => {
+      setUserAgent(
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3538.77 Safari/537.36'
+      );
+      expect(obsolete.test(['chrome 59', 'chrome 60', 'chrome 61'])).toBe(true);
+      expect(obsolete.test(['chrome 60', 'chrome 61', 'chrome 62'])).toBe(true);
+      expect(obsolete.test(['chrome 61', 'chrome 62', 'chrome 63'])).toBe(
+        false
+      );
+    });
+  });
+  describe('test unknown user agent', () => {
+    test('should not pass jsdom', () => {
       setUserAgent(
         'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/11.12.0'
       );
@@ -282,7 +307,7 @@ describe('obsolete-web', () => {
         expect(obsolete.test([item])).toBe(false);
       });
     });
-    it('should not pass google bot', () => {
+    test('should not pass google bot', () => {
       setUserAgent(
         'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
       );
@@ -292,12 +317,14 @@ describe('obsolete-web', () => {
     });
   });
   describe('test exception conditions', () => {
-    let obsolete;
-
-    beforeEach(() => {
-      obsolete = new Obsolete();
+    test('should throw empty', () => {
+      expect(() => {
+        obsolete.test([]);
+      }).toThrow();
     });
-    it('should throw empty', () => {
+  });
+  describe('test options', () => {
+    test('should throw empty', () => {
       expect(() => {
         obsolete.test([]);
       }).toThrow();
