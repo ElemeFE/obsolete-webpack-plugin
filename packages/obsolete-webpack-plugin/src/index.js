@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const browserslist = require('browserslist');
 const WebAsset = require('./web-asset');
 
@@ -28,7 +29,10 @@ class ObsoleteWebpackPlugin {
       ...defaultOptions,
       ...options,
     };
-    this.libraryPath = require.resolve('obsolete-web');
+    this.libraryPath = resolve(
+      require.resolve('obsolete-web'),
+      '../../dist/obsolete.js'
+    );
   }
   /**
    * Entrypoint of plugin.
