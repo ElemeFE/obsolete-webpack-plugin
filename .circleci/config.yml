@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run: npm run bootstrap
+      - run: npm run lint
+      - run: npm run build
+      - run: npm test:coverage
