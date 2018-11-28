@@ -4,6 +4,9 @@
   },
   "exclude": [
     "**/node_modules",
-    "**/dist"
+    "**/dist",
+    "**/cjs",
+    "**/esm",
+    "**/coverage",
   ]
 }
