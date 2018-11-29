@@ -59,7 +59,7 @@ class ObsoleteWebpackPlugin {
 
     const webAsset = new WebAsset(
       this.libraryPath,
-      compilation.outputOptions.filename
+      this.resolveFilename(compilation)
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);
     const template = this.options.template;
@@ -79,6 +79,19 @@ class ObsoleteWebpackPlugin {
     compilation.assets[webAsset.filename] = webAsset.createWebpackAsset(
       compilation.outputOptions.path
     );
+  }
+  /**
+   * Resolve named chunk filename.
+   *
+   * @param {Compilation} compilation See also webpack/lib/Compilation.js.
+   * @returns {string}
+   */
+  resolveFilename(compilation) {
+    const filename = compilation.outputOptions.chunkFilename;
+
+    return filename.includes('[name]') || filename.includes('[id]')
+      ? filename
+      : `[name].${filename}`;
   }
   /**
    * Connect entrypoint chunk group with plugin chunk each other

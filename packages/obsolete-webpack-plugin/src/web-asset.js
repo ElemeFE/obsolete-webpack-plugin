@@ -31,6 +31,7 @@ class WebAsset {
   hash(name) {
     this.filename = this.filename
       .replace(/\[name\]/gi, name)
+      .replace(/\[id\]/gi, name)
       .replace(/\[(?:content|chunk|)hash(?::(\d+))?\]/gi, (...matches) => {
         const hash = createHash(this.fileContent);
 
@@ -57,7 +58,7 @@ class WebAsset {
    * @param {string} [context.position]
    * @param {boolean} [context.promptOnNonTargetBrowser]
    * @param {boolean} [context.promptOnUnknownBrowser]
-   * @returns {string}.
+   * @returns {string}
    */
   composeCode(context) {
     const options = {
@@ -70,13 +71,15 @@ class WebAsset {
 
     return (
       this.fileContent +
-      `
-      (function () {
-        new Obsolete(${JSON.stringify(slimOptions)}).test(
-          ${JSON.stringify(context.browsers)}
-        );
-      }());
-    `
+      [
+        '(function () {',
+        '"use strict";',
+        '',
+        `new Obsolete(${JSON.stringify(slimOptions, null, 2)}).test(`,
+        JSON.stringify(context.browsers, null, 2),
+        ');',
+        '}());',
+      ].join('\n')
     );
   }
 }
