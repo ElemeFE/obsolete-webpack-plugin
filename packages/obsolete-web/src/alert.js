@@ -56,9 +56,9 @@ class Alert {
       return;
     }
     if (close.addEventListener) {
-      close.addEventListener('click', this.handleClose);
+      close.addEventListener('click', this.handleClose.bind(this));
     } else if (close.attachEvent) {
-      close.attachEvent('onclick', this.handleClose);
+      close.attachEvent('onclick', this.handleClose.bind(this));
     }
   }
   /**
