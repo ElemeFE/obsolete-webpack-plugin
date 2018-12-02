@@ -24,7 +24,7 @@ class WebAsset {
     this.fileContent = this.composeCode(context);
   }
   /**
-   * Format filename with placeholder of `[name]` and `[hash]`
+   * Format filename with placeholder of `[name]` and `[hash]`.
    *
    * @param {string} name The webpack chunk name to replace RegExp.
    */

@@ -94,7 +94,7 @@ class ObsoleteWebpackPlugin {
       : `[name].${filename}`;
   }
   /**
-   * Connect entrypoint chunk group with plugin chunk each other
+   * Connect entrypoint chunk group with plugin chunk each other.
    *
    * @param {Compilation} compilation See also webpack/lib/Compilation.js.
    * @param {Chunk} chunk See also webpack/lib/Chunk.js.
