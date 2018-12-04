@@ -1,5 +1,5 @@
 import Browser from './browser';
-import { forEach, entries } from './lib/mini-built-ins';
+import { forEach, entries, some } from './lib/mini-built-ins';
 
 class UAParser {
   constructor() {
@@ -89,7 +89,7 @@ class UAParser {
 
       if (
         rBrowsers.excludes &&
-        rBrowsers.excludes.some(rBrowser => rBrowser.exec(userAgent))
+        some(rBrowsers.excludes, rBrowser => rBrowser.exec(userAgent))
       ) {
         return;
       }

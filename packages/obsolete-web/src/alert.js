@@ -1,4 +1,4 @@
-import { forEach, entries } from './lib/mini-built-ins';
+import { forEach, entries, bind } from './lib/mini-built-ins';
 
 class Alert {
   constructor() {
@@ -21,10 +21,7 @@ class Alert {
       if (!firstChild) {
         break;
       }
-      if (
-        firstChild.nodeType === Node.ELEMENT_NODE &&
-        firstChild.nodeName === 'SCRIPT'
-      ) {
+      if (firstChild.nodeType === 1 && firstChild.nodeName === 'SCRIPT') {
         const script = this.createElement('script');
 
         script.innerHTML = firstChild.innerHTML;
@@ -56,9 +53,9 @@ class Alert {
       return;
     }
     if (close.addEventListener) {
-      close.addEventListener('click', this.handleClose.bind(this));
+      close.addEventListener('click', bind(this.handleClose, this));
     } else if (close.attachEvent) {
-      close.attachEvent('onclick', this.handleClose.bind(this));
+      close.attachEvent('onclick', bind(this.handleClose, this));
     }
   }
   /**

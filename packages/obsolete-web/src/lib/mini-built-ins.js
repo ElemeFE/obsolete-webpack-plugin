@@ -164,5 +164,19 @@ function entries(obj) {
   }
   return pairs;
 }
+/**
+ * Bind function to a specific context.
+ *
+ * @param {Object<string, any>} obj
+ */
+function bind(func, context, ...args) {
+  if (toString.call(func) !== '[object Function]') {
+    throw new TypeError('Parameter `func` is not a function.');
+  }
 
-export { forEach, map, filter, some, includes, keys, values, entries };
+  return function(...boundArgs) {
+    return func.apply(context, [...args, ...boundArgs]);
+  };
+}
+
+export { forEach, map, filter, some, includes, keys, values, entries, bind };

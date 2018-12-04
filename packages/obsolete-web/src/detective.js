@@ -1,7 +1,14 @@
 import UAParser from './ua-parser';
 import Browser from './browser';
 import { compareVersion } from './lib/comparator';
-import { filter, map, some, includes, values } from './lib/mini-built-ins';
+import {
+  filter,
+  map,
+  some,
+  includes,
+  values,
+  forEach,
+} from './lib/mini-built-ins';
 
 class Detective {
   /**
@@ -91,7 +98,7 @@ class Detective {
   getLowestVersionBrowsers(browsers) {
     const lowestVersionMap = {};
 
-    browsers.forEach(browser => {
+    forEach(browsers, browser => {
       if (!lowestVersionMap[browser.name]) {
         lowestVersionMap[browser.name] = browser;
         return;
