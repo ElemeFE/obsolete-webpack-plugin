@@ -2,7 +2,8 @@ const { resolve } = require('path');
 const { CachedSource, OriginalSource } = require('webpack-sources');
 const { readFileAsync } = require('./lib/async-fs');
 const { createHash } = require('./lib/hash');
-const { removeEmptyValues } = require('./lib/helper');
+const { removeEmptyValues } = require('./lib/filter');
+const { indent, stringify } = require('./lib/formatter');
 
 class WebAsset {
   /**
@@ -72,13 +73,15 @@ class WebAsset {
     return (
       this.fileContent +
       [
-        '(function () {',
-        '"use strict";',
-        '',
-        `new Obsolete(${JSON.stringify(slimOptions, null, 2)}).test(`,
-        JSON.stringify(context.browsers, null, 2),
-        ');',
-        '}());',
+        indent(`(function() {`, 0),
+        indent(`'use strict';`, 2),
+        indent(
+          `new Obsolete(${stringify(slimOptions)}).test(${stringify(
+            context.browsers
+          )});`,
+          2
+        ),
+        indent(`})();\n`, 0),
       ].join('\n')
     );
   }

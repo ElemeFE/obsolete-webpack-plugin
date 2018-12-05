@@ -29,10 +29,6 @@ class ObsoleteWebpackPlugin {
       ...defaultOptions,
       ...options,
     };
-    this.libraryPath = resolve(
-      require.resolve('obsolete-web'),
-      '../../dist/obsolete.js'
-    );
   }
   /**
    * Entrypoint of plugin.
@@ -58,7 +54,7 @@ class ObsoleteWebpackPlugin {
     }
 
     const webAsset = new WebAsset(
-      this.libraryPath,
+      ObsoleteWebpackPlugin.libraryPath,
       this.resolveFilename(compilation)
     );
     const obsoleteChunk = compilation.addChunk(this.options.name);
@@ -107,5 +103,9 @@ class ObsoleteWebpackPlugin {
     }
   }
 }
+ObsoleteWebpackPlugin.libraryPath = resolve(
+  require.resolve('obsolete-web'),
+  '../../dist/obsolete.js'
+);
 
 module.exports = ObsoleteWebpackPlugin;
