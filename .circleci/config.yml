@@ -5,6 +5,9 @@ jobs:
       - image: circleci/node:10
     steps:
       - run:
+          name: Working Directory
+          command: pwd
+      - run:
           name: Install Dependencies
           command: npm run bootstrap
       - run:
