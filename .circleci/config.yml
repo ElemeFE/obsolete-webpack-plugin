@@ -1,13 +1,11 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/obsolete-webpack-plugin
     docker:
       - image: circleci/node:10
     steps:
       - checkout
-      - run:
-          name: Working Directory
-          command: pwd
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package.json" }}
@@ -17,17 +15,16 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-            - packages/*/node_modules
           key: dependencies-{{ checksum "package.json" }}
       - run:
-          name: Code Lint
+          name: Lint Code
           command: npm run lint
       - run:
           name: Build Artifact
           command: npm run build
       - run:
-          name: Test Pass
-          command: npm test:coverage
+          name: Pass Test
+          command: npm run test:coverage
 workflows:
   version: 2
   build:

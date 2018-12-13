@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "bootstrap": "npm install && lerna bootstrap",
+    "bootstrap": "npm install && lerna bootstrap --no-ci",
     "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
     "build:umd": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
     "build:cjs": "cd packages/obsolete-web && cross-env BABEL_ENV=cjs babel --out-dir cjs src",
