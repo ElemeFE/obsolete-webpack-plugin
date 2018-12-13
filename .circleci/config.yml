@@ -4,12 +4,21 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
+      - checkout
       - run:
           name: Working Directory
           command: pwd
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}
       - run:
           name: Install Dependencies
           command: npm run bootstrap
+      - save_cache:
+          paths:
+            - node_modules
+            - packages/*/node_modules
+          key: dependencies-{{ checksum "package.json" }}
       - run:
           name: Code Lint
           command: npm run lint
