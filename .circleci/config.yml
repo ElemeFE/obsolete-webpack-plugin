@@ -26,22 +26,22 @@ commands:
           name: Upload Reporter
           command: npm run test:report
 jobs:
-  node:7.6:
+  node-7:
     docker:
-      - image: circleci/node:7.6
+      - image: circleci/node:7
     steps:
       - build
-  node:8:
+  node-8:
     docker:
       - image: circleci/node:8
     steps:
       - build
-  node:10:
+  node-10:
     docker:
       - image: circleci/node:10
     steps:
       - build
-  node:11:
+  node-11:
     docker:
       - image: circleci/node:11
     steps:
@@ -49,8 +49,8 @@ jobs:
 workflows:
   parallel-build:
     jobs:
-      - node:7.6
-      - node:8
-      - node:10
-      - node:11
+      - node-7
+      - node-8
+      - node-10
+      - node-11
 

@@ -82,7 +82,7 @@ IE | Edge | Chrome | Safari | Firefox | Opera | Electron
 ### Mobile
 
 ChromeAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
-:-: | :-: | :-: | :-:
+:-: | :-: | :-:
 ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
 
 ## FAQ :tea:
