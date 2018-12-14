@@ -272,7 +272,8 @@ describe('method-test', () => {
       setUserAgent(
         'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:10.0) like Gecko'
       );
-      expect(obsolete.test(['ie 9', 'ie 10', 'ie 11'])).toBe(true);
+      expect(obsolete.test(['ie 5.0', 'ie 5', 'ie 6'])).toBe(true);
+      expect(obsolete.test(['ie 5.5', 'ie 5', 'ie 6'])).toBe(true);
       expect(obsolete.test(['ie 10', 'ie 11'])).toBe(true);
       expect(obsolete.test(['ie 11'])).toBe(false);
     });
@@ -280,9 +281,9 @@ describe('method-test', () => {
       setUserAgent(
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3538.77 Safari/537.36'
       );
-      expect(obsolete.test(['chrome 59', 'chrome 60', 'chrome 61'])).toBe(true);
-      expect(obsolete.test(['chrome 60', 'chrome 61', 'chrome 62'])).toBe(true);
-      expect(obsolete.test(['chrome 61', 'chrome 62', 'chrome 63'])).toBe(
+      expect(obsolete.test(['chrome 61', 'chrome 59', 'chrome 60'])).toBe(true);
+      expect(obsolete.test(['chrome 62', 'chrome 60', 'chrome 61'])).toBe(true);
+      expect(obsolete.test(['chrome 63', 'chrome 61', 'chrome 62'])).toBe(
         false
       );
     });

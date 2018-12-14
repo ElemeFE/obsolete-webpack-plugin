@@ -1,9 +1,11 @@
 const glob = require('glob');
 const { getLibraryContent, replaceInterp } = require('./helpers/library');
 const { buildModule } = require('./helpers/bundler');
+const { cleanBuild } = require('./helpers/tasks');
 const { readFileSyncWrapper, readdirSyncWrapper } = require('./helpers/fs');
 
 describe('plugin', () => {
+  beforeAll(() => cleanBuild());
   it(`default should work as expected`, async () => {
     const context = await buildModule('default');
 
@@ -62,8 +64,8 @@ describe('plugin', () => {
       replaceInterp(expected)
     );
   });
-  it(`bundle-all should work as expected`, async () => {
-    const context = await buildModule('bundle-all');
+  it(`bundle should work as expected`, async () => {
+    const context = await buildModule('bundle');
 
     expect(readdirSyncWrapper(context, 'dist')).toEqual(
       readdirSyncWrapper(context, 'expected')
@@ -74,6 +76,25 @@ describe('plugin', () => {
       context,
       'expected',
       'obsolete.main.js'
+    );
+
+    expect(actual.indexOf(getLibraryContent())).toBe(0);
+    expect(actual.replace(getLibraryContent(), '')).toBe(
+      replaceInterp(expected)
+    );
+  });
+  it(`bundle-chunk should work as expected`, async () => {
+    const context = await buildModule('bundle-chunk');
+
+    expect(readdirSyncWrapper(context, 'dist')).toEqual(
+      readdirSyncWrapper(context, 'expected')
+    );
+
+    const actual = readFileSyncWrapper(context, 'dist', 'obsolete.chunk.js');
+    const expected = readFileSyncWrapper(
+      context,
+      'expected',
+      'obsolete.chunk.js'
     );
 
     expect(actual.indexOf(getLibraryContent())).toBe(0);

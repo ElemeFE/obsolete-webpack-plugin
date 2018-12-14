@@ -44,6 +44,24 @@ describe('options', () => {
           '<div>placeholder</div>'
       );
     });
+    it('should react click event with id `obsoleteClose`', () => {
+      setUserAgent(
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3538.77 Safari/537.36'
+      );
+      obsolete = new Obsolete({
+        template:
+          '<div>Template<button id="obsoleteClose">Close</button></div>',
+      });
+      expect(obsolete.test(['chrome 60'])).toBe(true);
+      expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+      expect(obsolete.test(['chrome 61'])).toBe(false);
+      expect(document.body.innerHTML).toBe(
+        '<div>Template<button id="obsoleteClose">Close</button></div>' +
+          '<div>placeholder</div>'
+      );
+      document.querySelector('#obsoleteClose').click();
+      expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+    });
   });
   describe('position', () => {
     it('should insert at the start of body', () => {
