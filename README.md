@@ -6,7 +6,7 @@ A Webpack plugin generates a browser-side standalone script that detects browser
 
 ### Prerequisite
 
-- Node >=7.6.0
+- Node >=8.3.0
 - Webpack 4.x
 
 ### Installation
