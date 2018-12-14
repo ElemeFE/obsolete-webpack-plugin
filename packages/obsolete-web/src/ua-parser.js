@@ -69,10 +69,6 @@ class UAParser {
         includes: [/Chrome\/((\d+)[.\w]*).+Mobile/i],
         excludes: [/wv/i],
       },
-      /**
-       * Firefox for mobile.
-       */
-      and_ff: [/Mobile.+Firefox\/((\d+)[.\w]*)/i],
     };
   }
   /**

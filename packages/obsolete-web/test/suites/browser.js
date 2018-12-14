@@ -9,7 +9,6 @@ function getBasicBrowsers(excludes = []) {
     'android 2.1',
     'ios_saf 3.2',
     'and_chr 30',
-    'and_ff 30',
   ];
 
   return basicBrowsers.filter(

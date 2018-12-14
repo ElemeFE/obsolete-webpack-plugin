@@ -147,17 +147,6 @@ describe('method-test', () => {
         expect(obsolete.test([item])).toBe(true);
       });
     });
-    it('should pass FirefoxAndroid', () => {
-      setUserAgent(
-        'Mozilla/5.0 (Android; Mobile; rv:38.0) Gecko/38.0 Firefox/38.0'
-      );
-      expect(obsolete.test(['and_ff 37'])).toBe(true);
-      expect(obsolete.test(['and_ff 38'])).toBe(true);
-      expect(obsolete.test(['and_ff 39'])).toBe(false);
-      getBasicBrowsers(['and_ff']).forEach(item => {
-        expect(obsolete.test([item])).toBe(true);
-      });
-    });
   });
   describe('test engine based user agent', () => {
     it('should pass QQ', () => {
