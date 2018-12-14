@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "bootstrap": "npm install && lerna bootstrap --no-ci",
+    "bootstrap": "npm install && lerna bootstrap --no-ci && lerna link",
     "build": "npm run build:umd && npm run build:cjs && npm run build:esm",
     "build:umd": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
     "build:cjs": "cd packages/obsolete-web && cross-env BABEL_ENV=cjs babel --out-dir cjs src",
@@ -10,9 +10,10 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "npm run test -- --collectCoverage",
+    "test:cover": "npm run test -- --collectCoverage",
+    "test:report": "codecov",
     "clean": "npm run clean:build && npm run clean:deps",
-    "clean:build": "del coverage packages/*/{dist,cjs,esm}",
+    "clean:build": "del coverage packages/*/{dist,cjs,esm} packages/*/test/**/dist",
     "clean:deps": "del **/node_modules",
     "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm run build && npm test"
   },
@@ -26,6 +27,7 @@
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "del-cli": "^1.1.0",
     "eslint": "^5.8.0",

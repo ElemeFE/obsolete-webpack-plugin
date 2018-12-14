@@ -1,4 +1,4 @@
-# Obsolete Webpack Plugin &middot; [![npm](https://img.shields.io/circleci/project/github/ElemeFE/obsolete-webpack-plugin.svg)](https://circleci.com/gh/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/eleme-fe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
+# Obsolete Webpack Plugin &middot; [![npm](https://img.shields.io/circleci/project/github/ElemeFE/obsolete-webpack-plugin.svg)](https://circleci.com/gh/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/codecov/c/github/ElemeFE/obsolete-webpack-plugin.svg)](https://codecov.io/github/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/eleme-fe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
 
 A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
@@ -81,9 +81,9 @@ IE | Edge | Chrome | Safari | Firefox | Opera | Electron
 
 ### Mobile
 
-ChromeAndroid | FirefoxAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
+ChromeAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 :-: | :-: | :-: | :-:
-![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/firefox/firefox_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
+![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/chrome/chrome_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/android-webview-beta/android-webview-beta_64x64.png) | ![](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.1.0/safari-ios/safari-ios_64x64.png)
 
 ## FAQ :tea:
 

@@ -1,32 +1,56 @@
 version: 2.1
-jobs:
+commands:
   build:
-    working_directory: ~/obsolete-webpack-plugin
-    docker:
-      - image: circleci/node:10
     steps:
       - checkout
       - restore_cache:
           keys:
             - dependencies-{{ checksum "package.json" }}
       - run:
-          name: Install Dependencies
+          name: Prepare Stage
           command: npm run bootstrap
       - save_cache:
           paths:
             - node_modules
           key: dependencies-{{ checksum "package.json" }}
       - run:
-          name: Lint Code
+          name: Lint Stage
           command: npm run lint
       - run:
-          name: Build Artifact
+          name: Build Stage
           command: npm run build
       - run:
-          name: Pass Test
-          command: npm run test:coverage
-workflows:
-  version: 2
-  build:
-    jobs:
+          name: Test Stage
+          command: npm run test:cover
+      - run:
+          name: Upload Reporter
+          command: npm run test:report
+jobs:
+  node:7.6:
+    docker:
+      - image: circleci/node:7.6
+    steps:
       - build
+  node:8:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - build
+  node:10:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - build
+  node:11:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - build
+workflows:
+  parallel-build:
+    jobs:
+      - node:7.6
+      - node:8
+      - node:10
+      - node:11
+
