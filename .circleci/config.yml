@@ -14,11 +14,11 @@ commands:
             - node_modules
           key: dependencies-{{ checksum "package.json" }}
       - run:
-          name: Lint Stage
-          command: npm run lint
-      - run:
           name: Build Stage
           command: npm run build
+      - run:
+          name: Lint Stage
+          command: npm run lint
       - run:
           name: Test Stage
           command: npm run test:cover

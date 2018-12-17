@@ -15,7 +15,7 @@
     "clean": "npm run clean:build && npm run clean:deps",
     "clean:build": "del coverage packages/*/{dist,cjs,esm} packages/*/test/**/dist",
     "clean:deps": "del **/node_modules",
-    "prepublishOnly": "npm run clean && npm run bootstrap && npm run lint && npm run build && npm test"
+    "prepublishOnly": "npm run clean && npm run bootstrap && npm run build && npm run lint && npm test"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
