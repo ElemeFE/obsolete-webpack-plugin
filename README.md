@@ -1,8 +1,12 @@
-# Obsolete Webpack Plugin &middot; [![npm](https://img.shields.io/circleci/project/github/ElemeFE/obsolete-webpack-plugin.svg)](https://circleci.com/gh/ElemeFE/obsolete-webpack-plugin) [![npm](https://ci.appveyor.com/api/projects/status/github/ElemeFE/obsolete-webpack-plugin?svg=true)](https://ci.appveyor.com/project/chikara-chan/obsolete-webpack-plugin) [![npm](https://img.shields.io/codecov/c/github/ElemeFE/obsolete-webpack-plugin.svg)](https://codecov.io/github/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/eleme-fe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
+# Obsolete Webpack Plugin
+
+[![npm](https://img.shields.io/circleci/project/github/ElemeFE/obsolete-webpack-plugin.svg)](https://circleci.com/gh/ElemeFE/obsolete-webpack-plugin) [![npm](https://ci.appveyor.com/api/projects/status/github/ElemeFE/obsolete-webpack-plugin?svg=true)](https://ci.appveyor.com/project/chikara-chan/obsolete-webpack-plugin) [![npm](https://img.shields.io/codecov/c/github/ElemeFE/obsolete-webpack-plugin.svg)](https://codecov.io/github/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![npm](https://img.badgesize.io/https://unpkg.com/obsolete-web/dist/obsolete.min.js?compression=gzip)](https://unpkg.com/obsolete-web/dist/obsolete.min.js) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/eleme-fe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
+
+## Introduction :low_brightness:
 
 A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
-## Getting Started :rocket:
+## Getting Started :zap:
 
 ### Prerequisite
 
