@@ -4,7 +4,7 @@ import Alert from './alert';
 class Obsolete {
   static defaultOptions = {
     template:
-      '<div>Your browser is not supported.<button id="obsoleteClose">&times;</button></div>',
+      '<div>Your browser is not supported. <button id="obsoleteClose">&times;</button></div>',
     position: 'afterbegin',
     promptOnNonTargetBrowser: false,
     promptOnUnknownBrowser: true,

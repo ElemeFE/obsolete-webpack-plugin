@@ -108,4 +108,40 @@ describe('plugin', () => {
 
     expect(actual.indexOf('!function(r,e)')).toBe(0);
   });
+  it(`html should work as expected`, async () => {
+    const context = await buildModule('html');
+
+    expect(readdirSyncWrapper(context, 'dist')).toEqual(
+      readdirSyncWrapper(context, 'expected')
+    );
+
+    const actual = readFileSyncWrapper(context, 'dist', 'obsolete.js');
+    const expected = readFileSyncWrapper(context, 'expected', 'obsolete.js');
+    const actualHTML = readFileSyncWrapper(context, 'dist', 'index.html');
+    const expectedHTML = readFileSyncWrapper(context, 'expected', 'index.html');
+
+    expect(actual.indexOf(getLibraryContent())).toBe(0);
+    expect(actual.replace(getLibraryContent(), '')).toBe(
+      replaceInterp(expected)
+    );
+    expect(actualHTML).toBe(expectedHTML);
+  });
+  it(`html-async should work as expected`, async () => {
+    const context = await buildModule('html-async');
+
+    expect(readdirSyncWrapper(context, 'dist')).toEqual(
+      readdirSyncWrapper(context, 'expected')
+    );
+
+    const actual = readFileSyncWrapper(context, 'dist', 'obsolete.js');
+    const expected = readFileSyncWrapper(context, 'expected', 'obsolete.js');
+    const actualHTML = readFileSyncWrapper(context, 'dist', 'index.html');
+    const expectedHTML = readFileSyncWrapper(context, 'expected', 'index.html');
+
+    expect(actual.indexOf(getLibraryContent())).toBe(0);
+    expect(actual.replace(getLibraryContent(), '')).toBe(
+      replaceInterp(expected)
+    );
+    expect(actualHTML).toBe(expectedHTML);
+  });
 });
