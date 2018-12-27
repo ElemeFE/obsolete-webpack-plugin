@@ -60,7 +60,7 @@ module.exports = {
 };
 ```
 
-## Configuration :art:
+## Configuration :book:
 
 ### Options
 
@@ -72,6 +72,10 @@ module.exports = {
 | browsers | string[] | | Browsers to support, overriding global browserslist configuration.
 | promptOnNonTargetBrowser | boolean | `false` | If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
 | promptOnUnknownBrowser | boolean | `true` | If the current browser useragent is unknown, the prompt will be shown.
+
+## Demonstration :art:
+
+![](https://fuss10.elemecdn.com/c/ee/57a564fb6b64c7cf8cf3ac37293c9gif.gif)
 
 ## Browser Support :eyeglasses:
 
@@ -94,3 +98,5 @@ ChromeAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 Q: Does plugin support Yandex, Maxthon, UC or QQ browser?
 
 A: Yep. Plugin support those browsers based on the mainstream browser kernel, such as Chromium based browser, Mozilla based browser. In other words, `Chrome >= 30` will be also applied to Yandex browser, `ChromeAndroid >= 30` will be also applied to Android UC browser.
+
+<!-- ## External Links :anchor: -->
