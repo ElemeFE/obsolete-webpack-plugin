@@ -2,11 +2,11 @@
 
 [![npm](https://img.shields.io/circleci/project/github/ElemeFE/obsolete-webpack-plugin.svg)](https://circleci.com/gh/ElemeFE/obsolete-webpack-plugin) [![npm](https://ci.appveyor.com/api/projects/status/github/ElemeFE/obsolete-webpack-plugin?svg=true)](https://ci.appveyor.com/project/chikara-chan/obsolete-webpack-plugin) [![npm](https://img.shields.io/codecov/c/github/ElemeFE/obsolete-webpack-plugin.svg)](https://codecov.io/github/ElemeFE/obsolete-webpack-plugin) [![npm](https://img.shields.io/npm/v/obsolete-webpack-plugin.svg)](https://npmjs.com/package/obsolete-webpack-plugin) [![node](https://img.shields.io/node/v/obsolete-webpack-plugin.svg)](https://nodejs.org) [![npm](https://img.badgesize.io/https://unpkg.com/obsolete-web/dist/obsolete.min.js?compression=gzip)](https://unpkg.com/obsolete-web/dist/obsolete.min.js) [![licenses](https://img.shields.io/npm/l/obsolete-webpack-plugin.svg)](https://gitlab.alibaba-inc.com/eleme-fe-lpd/obsolete-webpack-plugin/blob/master/LICENSE)
 
-## Introduction :low_brightness:
+## Introduction :star2:
 
 A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
-## Motivation
+## Motivation :collision:
 
 In modern front-end development, we use toolchain to convert next JavaScript version into a backwards compatible version of JavaScript that works in older browser environment. For next syntax features, such as [Object Rest/Spread Properties](https://tc39.github.io/proposal-object-rest-spread/), [Exponentiation Operator](http://rwaldron.github.io/exponentiation-operator/), we can transform all of them through [AST](https://astexplorer.net/) parser. For next built-in features, such as [Promise](https://tc39.github.io/ecma262/#sec-promise-objects), [WeakMap](https://tc39.github.io/ecma262/#sec-weakmap-objects), [String.prototype.padstart](https://tc39.github.io/ecma262/#sec-string.prototype.padstart), we can provide pollyfills that mimic native functionality. However, for some browser only features, such as [Service Worker](https://w3c.github.io/ServiceWorker/), [WebAssembly](https://webassembly.github.io/spec/js-api/), [CSS Grid Layout](https://drafts.csswg.org/css-grid/), no polyfills support these or partially support. In the worst case, our users who use old browsers open a website but catch a sight of blank page. It may be a bad network condition, may be syntax parsing error, may be built-in losing. But they must not realize that the browser they using does not meet the requirements of our website target. Therefore, we need a mechanism to notify that they should upgrade their browser before accessing content. Thus, this plugin borns.
 
