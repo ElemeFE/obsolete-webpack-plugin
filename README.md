@@ -6,6 +6,10 @@
 
 A Webpack plugin generates a browser-side standalone script that detects browser compatibility based on [Browserslist](https://github.com/browserslist/browserslist) and prompts website users to upgrade it.
 
+## Motivation
+
+In modern front-end development, we use toolchain to convert next JavaScript version into a backwards compatible version of JavaScript that works in older browser environment. For next syntax features, such as [Object Rest/Spread Properties](https://tc39.github.io/proposal-object-rest-spread/), [Exponentiation Operator](http://rwaldron.github.io/exponentiation-operator/), we can transform all of them through [AST](https://astexplorer.net/) parser. For next built-in features, such as [Promise](https://tc39.github.io/ecma262/#sec-promise-objects), [WeakMap](https://tc39.github.io/ecma262/#sec-weakmap-objects), [String.prototype.padstart](https://tc39.github.io/ecma262/#sec-string.prototype.padstart), we can provide pollyfills that mimic native functionality. However, for some browser only features, such as [Service Worker](https://w3c.github.io/ServiceWorker/), [WebAssembly](https://webassembly.github.io/spec/js-api/), [CSS Grid Layout](https://drafts.csswg.org/css-grid/), no polyfills support these or partially support. In the worst case, our users who use old browsers open a website but catch a sight of blank page. It may be a bad network condition, may be syntax parsing error, may be built-in losing. But they must not realize that the browser they using does not meet the requirements of our website target. Therefore, we need a mechanism to notify that they should upgrade their browser before accessing content. Thus, this plugin borns.
+
 ## Getting Started :zap:
 
 ### Prerequisite
@@ -95,8 +99,12 @@ ChromeAndroid | Android<br>(5+, WebView) | iOS<br>(OS)
 
 ## FAQ :tea:
 
-Q: Does plugin support Yandex, Maxthon, UC or QQ browser?
+Q: Does this plugin support Yandex, Maxthon, UC or QQ browser?
 
-A: Yep. Plugin support those browsers based on the mainstream browser kernel, such as Chromium based browser, Mozilla based browser. In other words, `Chrome >= 30` will be also applied to Yandex browser, `ChromeAndroid >= 30` will be also applied to Android UC browser.
+A: Yep. This plugin supports those browsers based on the mainstream browser kernel, such as Chromium based browser, Mozilla based browser. In other words, `Chrome >= 30` will be also applied to Yandex browser, `ChromeAndroid >= 30` will be also applied to Android UC browser.
+
+Q: Does plugin work in IE 6?
+
+A: Yep. This plugin supports browsers that implement the full [ES3 spec](https://www-archive.mozilla.org/js/language/E262-3.pdf). Although the source code is ES2015+, it will be compiled and shimmed to the target environment eventually.
 
 <!-- ## External Links :anchor: -->
