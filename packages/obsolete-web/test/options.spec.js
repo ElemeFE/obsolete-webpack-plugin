@@ -19,10 +19,16 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        '<div>Sorry.</div>' + '<div>placeholder</div>'
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe(
+              '<div>Sorry.</div>' + '<div>placeholder</div>'
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
     it('should insert custom multiple template', () => {
       setUserAgent(
@@ -36,13 +42,19 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        '<style>body { color: red; }</style>' +
-          '<div id="my">So sorry.</div>' +
-          '<script>document.querySelector("#my").innerHTML = "So sorry."</script>' +
-          '<div>placeholder</div>'
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe(
+              '<style>body { color: red; }</style>' +
+                '<div id="my">So sorry.</div>' +
+                '<script>document.querySelector("#my").innerHTML = "So sorry."</script>' +
+                '<div>placeholder</div>'
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
     it('should react click event with id `obsoleteClose`', () => {
       setUserAgent(
@@ -54,13 +66,19 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        '<div>Template<button id="obsoleteClose">Close</button></div>' +
-          '<div>placeholder</div>'
-      );
-      document.querySelector('#obsoleteClose').click();
-      expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe(
+              '<div>Template<button id="obsoleteClose">Close</button></div>' +
+                '<div>placeholder</div>'
+            );
+            document.querySelector('#obsoleteClose').click();
+            expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
   });
   describe('position', () => {
@@ -73,10 +91,17 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        unescape(Obsolete.defaultOptions.template) + '<div>placeholder</div>'
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe(
+              unescape(Obsolete.defaultOptions.template) +
+                '<div>placeholder</div>'
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
     it('should insert at the end of body', () => {
       setUserAgent(
@@ -87,10 +112,17 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        '<div>placeholder</div>' + unescape(Obsolete.defaultOptions.template)
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe(
+              '<div>placeholder</div>' +
+                unescape(Obsolete.defaultOptions.template)
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
     it('should not insert into body when position is unknown', () => {
       setUserAgent(
@@ -101,8 +133,14 @@ describe('options', () => {
       });
       expect(obsolete.test(['chrome 60'])).toBe(true);
       expect(document.body.innerHTML).toBe('<div>placeholder</div>');
-      expect(obsolete.test(['chrome 61'])).toBe(false);
-      expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 61'], () => {
+            expect(document.body.innerHTML).toBe('<div>placeholder</div>');
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
   });
   describe('promptOnNonTargetBrowser', () => {
@@ -123,10 +161,17 @@ describe('options', () => {
       obsolete = new Obsolete({
         promptOnNonTargetBrowser: true,
       });
-      expect(obsolete.test(['ie 11'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        unescape(Obsolete.defaultOptions.template) + '<div>placeholder</div>'
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['ie 11'], () => {
+            expect(document.body.innerHTML).toBe(
+              unescape(Obsolete.defaultOptions.template) +
+                '<div>placeholder</div>'
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
   });
   describe('promptOnUnknownBrowser', () => {
@@ -150,10 +195,17 @@ describe('options', () => {
       obsolete = new Obsolete({
         promptOnUnknownBrowser: true,
       });
-      expect(obsolete.test(['chrome 60'])).toBe(false);
-      expect(document.body.innerHTML).toBe(
-        unescape(Obsolete.defaultOptions.template) + '<div>placeholder</div>'
-      );
+      return new Promise(resolve => {
+        expect(
+          obsolete.test(['chrome 60'], () => {
+            expect(document.body.innerHTML).toBe(
+              unescape(Obsolete.defaultOptions.template) +
+                '<div>placeholder</div>'
+            );
+            resolve();
+          })
+        ).toBe(false);
+      });
     });
   });
 });

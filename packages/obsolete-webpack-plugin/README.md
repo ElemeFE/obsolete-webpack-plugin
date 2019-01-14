@@ -4,4 +4,4 @@ A Webpack plugin generates a browser-side standalone script that detects browser
 
 ## Getting Started
 
-Please visit our github [repository](//github.elenet.me/fe/obsolete-webpack-plugin) main page.
+Please see our github [repository](//github.elenet.me/fe/obsolete-webpack-plugin) main page.

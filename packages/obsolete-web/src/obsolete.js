@@ -1,5 +1,6 @@
 import Detective from './detective';
 import Alert from './alert';
+import { requestIdleCallback } from './lib/scheduler';
 
 class Obsolete {
   static defaultOptions = {
@@ -34,9 +35,10 @@ class Obsolete {
    * Test browser compatibility.
    *
    * @param {string[]} browsers Browser names in Can I Use.
+   * @param {function} done Callback when the template is injected in finish.
    * @returns {boolean}
    */
-  test(browsers) {
+  test(browsers, done) {
     if (!browsers.length) {
       throw new Error('Parameter `browsers` is empty.');
     }
@@ -47,14 +49,16 @@ class Obsolete {
       this.options.promptOnNonTargetBrowser,
       this.options.promptOnUnknownBrowser
     );
-
     if (!passed) {
-      if (this.alert) {
-        this.alert.handleClose();
-      } else {
-        this.alert = new Alert();
-      }
-      this.alert.prompt(this.options.template, this.options.position);
+      requestIdleCallback(() => {
+        if (this.alert) {
+          this.alert.handleClose();
+        } else {
+          this.alert = new Alert();
+        }
+        this.alert.prompt(this.options.template, this.options.position);
+        done && done();
+      });
       return false;
     }
     return true;

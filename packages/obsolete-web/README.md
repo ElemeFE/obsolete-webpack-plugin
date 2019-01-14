@@ -50,13 +50,14 @@ new Obsolete().test(['ie 10', 'chrome 23'])
 
 #### Syntax
 
-> test(browsers)
+> test(browsers, done)
 
 Test browser compatibility.
 
 #### Parameters
 
 - `browsers` `{string[]}` Browser names in Can I Use.
+- `done` `{function}` Callback when the template is injected in finish.
 
 #### Returns
 
