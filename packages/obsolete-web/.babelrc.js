@@ -28,8 +28,9 @@ module.exports = {
           '@babel/env',
           {
             modules: 'commonjs',
+            loose: true,
             targets: {
-              browsers: '> 0%',
+              browsers: '>= 0%',
             },
           },
         ],
@@ -41,8 +42,9 @@ module.exports = {
           '@babel/env',
           {
             modules: 'commonjs',
+            loose: true,
             targets: {
-              browsers: '> 0%',
+              browsers: '>= 0%',
             },
           },
         ],
@@ -54,8 +56,9 @@ module.exports = {
           '@babel/env',
           {
             modules: false,
+            loose: true,
             targets: {
-              browsers: '> 0%',
+              browsers: '>= 0%',
             },
           },
         ],

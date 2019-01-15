@@ -17,13 +17,16 @@ commands:
           name: Build Stage
           command: npm run build
       - run:
+          name: Check Stage
+          command: npm run size
+      - run:
           name: Lint Stage
           command: npm run lint
       - run:
           name: Test Stage
           command: npm run test:cover
       - run:
-          name: Upload Reporter
+          name: Report Stage
           command: npm run test:report
 jobs:
   node-8:

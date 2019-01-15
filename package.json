@@ -6,6 +6,7 @@
     "build:umd": "cd packages/obsolete-web && rollup --config build/rollup.config.js",
     "build:cjs": "cd packages/obsolete-web && cross-env BABEL_ENV=cjs babel --out-dir cjs src",
     "build:esm": "cd packages/obsolete-web && cross-env BABEL_ENV=esm babel --out-dir esm src",
+    "size": "size-limit --limit 5KB packages/obsolete-web/dist/obsolete.min.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest",
@@ -15,7 +16,7 @@
     "clean": "npm run clean:build && npm run clean:deps",
     "clean:build": "del coverage packages/*/{dist,cjs,esm} packages/*/test/**/dist",
     "clean:deps": "del **/node_modules",
-    "prepublishOnly": "npm run clean && npm run bootstrap && npm run build && npm run lint && npm test"
+    "prepublishOnly": "npm run clean && npm run bootstrap && npm run build && npm run size && npm run lint && npm run test"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -44,6 +45,7 @@
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-uglify": "^6.0.0",
     "script-ext-html-webpack-plugin": "^2.1.3",
+    "size-limit": "^0.21.1",
     "webpack": "^4.26.1",
     "webpack-merge": "^4.1.4",
     "yorkie": "^2.0.0"
