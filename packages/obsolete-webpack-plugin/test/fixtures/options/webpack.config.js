@@ -8,7 +8,7 @@ module.exports = {
       position: 'beforeend',
       browsers: ['Chrome < 10'],
       promptOnNonTargetBrowser: true,
-      promptOnUnknownBrowser: false,
-    }),
-  ],
+      promptOnUnknownBrowser: false
+    })
+  ]
 };

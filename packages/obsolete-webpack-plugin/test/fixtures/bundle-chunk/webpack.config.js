@@ -2,7 +2,7 @@ const Plugin = require('../../../src');
 
 module.exports = {
   output: {
-    chunkFilename: 'chunk.js',
+    chunkFilename: 'chunk.js'
   },
-  plugins: [new Plugin()],
+  plugins: [new Plugin()]
 };

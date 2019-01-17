@@ -3,6 +3,6 @@
   new Obsolete({
     position: 'afterbegin',
     promptOnNonTargetBrowser: false,
-    promptOnUnknownBrowser: true,
+    promptOnUnknownBrowser: true
   }).test(__defaultBrowsers);
 })();

@@ -6,8 +6,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
     new ScriptExtHtmlWebpackPlugin({
-      async: 'obsolete',
+      async: 'obsolete'
     }),
-    new Plugin(),
-  ],
+    new Plugin()
+  ]
 };

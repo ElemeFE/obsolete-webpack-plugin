@@ -16,9 +16,7 @@ function indent(str, size) {
 function stringify(json, indent = 2) {
   return JSON.stringify(json, null, indent)
     .replace(/"/g, `'`)
-    .replace(/'(\w+)':/g, '$1:')
-    .replace(/\s*}/g, ',$&')
-    .replace(/\s*]/g, ',$&');
+    .replace(/'(\w+)':/g, '$1:');
 }
 
 module.exports = {
