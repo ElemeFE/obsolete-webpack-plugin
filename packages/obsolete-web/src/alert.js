@@ -47,8 +47,13 @@ class Alert {
    * @param {DocumentFragment} fragment
    */
   bindEvents(fragment) {
-    const close = fragment.getElementById('obsoleteClose');
+    let close;
 
+    if (fragment.querySelector) {
+      close = fragment.querySelector('#obsoleteClose');
+    } else if (fragment.getElementById) {
+      close = fragment.getElementById('obsoleteClose');
+    }
     if (!close) {
       return;
     }
