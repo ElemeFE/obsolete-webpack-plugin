@@ -6,7 +6,7 @@
  */
 function requestIdleCallback(callback, options = {}) {
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(callback, options);
+    window.requestIdleCallback(callback, options);
     return;
   }
 
