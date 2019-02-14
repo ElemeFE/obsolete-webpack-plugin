@@ -5,6 +5,7 @@
 - OS Version: <!-- e.g. OSX 10.13.0, Windows 10 -->
 - Node Version: <!-- e.g. Node 10 -->
 - NPM Version: <!-- e.g. NPM 6 -->
+- Browser Version: <!-- e.g. Chrome 70 -->
 
 ## Current Behavior
 
