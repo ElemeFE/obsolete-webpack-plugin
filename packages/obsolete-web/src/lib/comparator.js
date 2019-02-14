@@ -1,3 +1,5 @@
+import { forEach } from './mini-built-ins';
+
 /**
  * Validate if a string is semantic version.
  *
@@ -24,7 +26,7 @@ function compareVersion(version, comparedVersion) {
   const rVersion = /\d+/g;
   const rComparedVersion = /\d+/g;
 
-  [version, comparedVersion].forEach(version => {
+  forEach([version, comparedVersion], version => {
     validateSemantic(version);
   });
 
