@@ -106,7 +106,7 @@ describe('plugin', () => {
     const context = await buildModule('prod');
     const actual = readFileSyncWrapper(context, 'dist', 'obsolete.js');
 
-    expect(actual.indexOf('!function(e,r)')).toBe(0);
+    expect(actual.indexOf('!function(')).toBe(0);
   });
   it(`html should work as expected`, async () => {
     const context = await buildModule('html');
