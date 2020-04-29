@@ -74,7 +74,7 @@ module.exports = {
 | template | string | `'<div>Your browser is not supported. <button id="obsoleteClose">&times;</button></div>'` | The prompt html template. It accepts any document fragment. E.g., `'<style>...</style><div>...</div><script>...</script>'`. Specially, the template will be removed when a node with attribute `id="obsoleteClose"` is clicked.
 | position | string | `'afterbegin'` | If set `'afterbegin'`, the template will be injected into the start of body. <br>If set `'beforeend'`, the template will be injected into the end of body.
 | browsers | string[] | | Browsers to support, overriding global browserslist configuration.
-| promptOnNonTargetBrowser | boolean | `false` | If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g, your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser.
+| promptOnNonTargetBrowser | boolean | `false` | If the current browser useragent doesn't match one of the target browsers, it's considered as unsupported. Thus, the prompt will be shown. E.g., your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or Safari browser. E.g., your browserslist configuration is `ie > 8`, by default, the prompt won't be shown on Chrome or other browsers. Another e.g., your browserslist configuration is `chrome > 80`, by default, the prompt won't be shown on IE or other browsers.
 | promptOnUnknownBrowser | boolean | `true` | If the current browser useragent is unknown, the prompt will be shown.
 
 ## Demonstration :art:
